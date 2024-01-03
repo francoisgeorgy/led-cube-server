@@ -1,15 +1,12 @@
-import ReactDOM from 'react-dom/client'
-import './index.css'
 import App from "./App.tsx";
+import * as ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import './index.css'
 
-// import { ThemeProvider } from "@material-tailwind/react";
+// Note: strict mode is removed to avoid some issue with websockets (double connection in dev mode).
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <div>
-        {/*<ThemeProvider>*/}
+    <BrowserRouter>
         <App />
-        {/*</ThemeProvider>*/}
-        </div>
-)
-    // <React.StrictMode>
-    // </React.StrictMode>,
+    </BrowserRouter>
+);
