@@ -15,12 +15,12 @@ const RUBIK: Application = {
 export function Rubik() {
     return (
         <div className="p-4">
-            <h2>Rubik</h2>
-            <div className="my-4">
-                <StartApplicationButton application={RUBIK} />
-                <StopApplicationButton application={RUBIK} />
+            <div className="flex align-middle">
+                <div className="self-center flex-grow text-xl font-bold">Rubik's Cube</div>
+                <div className="self-center mx-4"><StartApplicationButton application={RUBIK}/></div>
+                <div className="self-center"><StopApplicationButton application={RUBIK}/></div>
             </div>
-            <WsRubikClient />
+            <WsRubikClient/>
         </div>
     );
 }

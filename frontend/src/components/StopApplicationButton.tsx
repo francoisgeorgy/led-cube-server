@@ -13,6 +13,6 @@ export function StopApplicationButton({application}: CommandButtonProps) {
 
     return (
         <button onClick={() => stopApplication(application)}
-            className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Stopper</button>
+            className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Stopper</button>
     )
 }
