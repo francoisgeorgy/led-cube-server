@@ -1,11 +1,11 @@
 import {state} from "../State.ts";
 
-export const startScript = async (script: string) => {
+export const startScript = async (category: string, script: string) => {
     console.log("enter sendCommand");
     try {
         console.log("send command");
         const response = await fetch(
-            `http://${state.cube_address}/api/start/${script}`,
+            `http://${state.cube_address}/api/start/${category}/${script}`,
             {mode: "cors"}
         );
         console.log("command sent");
@@ -15,20 +15,22 @@ export const startScript = async (script: string) => {
         }
         // console.log(data); // Process your data here
         state.setStatus(data?.message ?? '');
+        return true;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         // @ts-expect-error error is not type
         state.setStatus(error.message ?? 'Erreur de communication');
+        return false;
     }
     // console.log("return from sendCommand");
 };
 
-export const stopApplicationScript = async (script: string) => {
+export const stopApplicationScript = async (category: string, script: string) => {
     console.log("enter stopApplicationScript");
     try {
         console.log("send command");
         const response = await fetch(
-            `http://${state.cube_address}/api/stop/${script}`,
+            `http://${state.cube_address}/api/stop/${category}/${script}`,
             {mode: "cors"}
         );
         console.log("command sent");

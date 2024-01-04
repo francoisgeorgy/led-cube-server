@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import signal
@@ -9,34 +10,40 @@ from bottle import run, response, Bottle, error, static_file, json_dumps
 from utils.applications import get_applications
 from utils.host import get_cube_ip
 
-# Determine the environment and choose the corresponding config file
-env = os.getenv('CUBE_ENV', 'development')
-config_file = f'config.{env}.json'
+verbose = False
 
 #
 # The path to the config file can also be passed as a command line argument.
 # Otherwise the file is searched for in the './config' directory.
 #
 # FIXME: use an option; sanitize the entry.
-if len(sys.argv) > 1:
-    config_file_name = sys.argv[1]
-else:
-    config_file_name = os.path.join('.', 'config', config_file)
-
-# Load configuration from the file
-try:
-    with open(config_file_name, 'r') as f:
-        config_data = json.load(f)
-    print('configuration loaded from {}'.format(config_file_name))
-except FileNotFoundError:
-    print("Config file not found")
-    sys.exit(1)
+# if len(sys.argv) > 1:
+#     config_file_name = sys.argv[1]
+# else:
+#     config_file_name = os.path.join('.', 'config', config_file)
 
 app = Bottle()
-app.config.update(config_data)
 
 # Max one script can be running
 running_script = None
+
+
+def _call_script(script):
+    global running_script
+    if running_script:
+        return None
+    script_path = os.path.join(app.config['scripts_dir'], script)
+    if not os.path.isfile(script_path):
+        return None
+    try:
+        p = subprocess.Popen(script_path, stdout=subprocess.PIPE, shell=False, preexec_fn=os.setsid)
+        running_script = {
+            'script': script,
+            'process': p
+        }
+        return os.getpgid(p.pid)
+    except Exception as e:
+        return None
 
 
 @error(404)
@@ -44,28 +51,29 @@ def page_not_found(e):
     return dict(error=404, text=str(e))
 
 
-@app.route('/api/scripts')
-def scripts():
-    # Get the directory path from the configuration
-    directory = app.config.get('scripts_dir', '.')
+# @app.route('/api/scripts')
+# def scripts():
+#     # Get the directory path from the configuration
+#     directory = app.config.get('scripts_dir', '.')
+#
+#     # List all files in the directory
+#     try:
+#         files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+#     except FileNotFoundError:
+#         response.status = 404
+#         return {"error": "Scripts directory not found"}
+#
+#     # Return the list of files as JSON
+#     response.content_type = 'application/json'
+#     return json.dumps(files)
 
-    # List all files in the directory
-    try:
-        files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
-    except FileNotFoundError:
-        response.status = 404
-        return {"error": "Scripts directory not found"}
 
-    # Return the list of files as JSON
-    response.content_type = 'application/json'
-    return json.dumps(files)
-
-
-@app.route('/api/start/<script>')
-def start_script(script):
+@app.route('/api/start/<category>/<script>')
+def start_script(category, script):
     """
     https://stackoverflow.com/questions/4789837/how-to-terminate-a-python-subprocess-launched-with-shell-true/4791612#4791612
 
+    :param category:
     :param script: the filename of the script, without the path
     :return:
     """
@@ -73,7 +81,7 @@ def start_script(script):
     if running_script:
         response.status = 409   # conflict
         return {"error": f"A script is already running."}
-    script_path = os.path.join(app.config['scripts_dir'], script)
+    script_path = os.path.join(app.config['scripts_dir'], category, script)
     if not os.path.isfile(script_path):
         response.status = 400
         return {"error": f"{script_path} does not exist"}
@@ -92,16 +100,17 @@ def start_script(script):
         return {"error": str(e)}
 
 
-@app.route('/api/stop/<script>')
-def stop_script(script):
+@app.route('/api/stop/<category>/<script>')
+def stop_script(category, script):
     """
     https://stackoverflow.com/questions/4789837/how-to-terminate-a-python-subprocess-launched-with-shell-true/4791612#4791612
 
+    :param category:
     :param script: the filename of the script, without the path
     :return:
     """
     # TODO: rename "callScript"
-    script_path = os.path.join(app.config['scripts_dir'], script)
+    script_path = os.path.join(app.config['scripts_dir'], category, script)
     if not os.path.isfile(script_path):
         response.status = 400
         return {"error": f"{script_path} does not exist"}
@@ -130,8 +139,9 @@ def stop_current_script():
     try:
         pid = os.getpgid(running_script['process'].pid)
         os.killpg(pid, signal.SIGTERM)  # Send the signal to all the process groups
+        s = running_script['script']
         running_script = None
-        return {"message": f"script {running_script['script']} stopped"}
+        return {"message": f"script {s} stopped"}
     except Exception as e:
         response.status = 500
         return {"error": str(e)}
@@ -153,6 +163,12 @@ def running():
 def ping():
     """Utility api end-point mainly for quick-testing; could be used to monitor is the server is up."""
     return {"message": "pong"}
+
+
+@app.route('/api/applications/<category>')
+def applications(category):
+    response.content_type = 'application/json'
+    return json_dumps(get_applications(app.config['scripts_dir'], category))
 
 
 @app.route('/api/applications')
@@ -177,5 +193,40 @@ def enable_cors():
 
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser(description='LED Cube server')
+
+    parser.add_argument('-c', '--config', type=str, default=None, help='Path to the configuration file')
+    parser.add_argument('-s', '--script', type=str, default=None, help='Name of the script to run')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose mode')
+    args = parser.parse_args()
+    verbose = args.verbose
+
+    print(f"Configuration file: {args.config}")
+    print(f"Script to run: {args.script}")
+
+    # Load configuration from the file
+    env = os.getenv('CUBE_ENV', 'development')
+    if args.config is None:
+        config_file = os.path.join('.', 'config', f'config.{env}.json')
+    else:
+        config_file = args.config
+    try:
+        with open(config_file, 'r') as f:
+            config_data = json.load(f)
+    except FileNotFoundError:
+        print(f'Config file {config_file} not found')
+        sys.exit(1)
+    except PermissionError:
+        print(f'Unable to read config file {config_file}')
+        sys.exit(1)
+    app.config.update(config_data)
+    print(f'configuration loaded from {config_file}')
+
+    if args.script is not None:
+        _call_script(args.script)
+        # TODO: handle error if script not found
+
     host_ip = get_cube_ip()
+    # TODO: use a better WSGI runner (e.g. gunicorn)
     run(app=app, host=f'{host_ip}', port=5040, debug=False, reloader=False)

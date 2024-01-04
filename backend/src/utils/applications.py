@@ -1,11 +1,18 @@
 import os
 
 
-def get_applications(directory):
+def get_applications(directory, category=''):
+
+    # print("get_applications", directory, category, os.path.join(directory, category))
+
     applications = []
-    for file in os.listdir(directory):
-        if file.startswith("start_") and file.endswith(".sh"):
+    files = os.listdir(os.path.join(directory, category))
+    files.sort()
+    for file in files:
+        # print(file)
+        if file.endswith("_start.sh"):
             app_name = os.path.splitext(file)[0]
+            app_name = app_name.replace('_start', '')
 
             app_description = ""
             description_file = os.path.join(directory, app_name + ".md")

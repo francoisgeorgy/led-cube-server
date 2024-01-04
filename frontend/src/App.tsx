@@ -5,28 +5,23 @@ import {ApplicationsList} from "./pages/ApplicationsList.tsx";
 import {Footer} from "./components/Footer.tsx";
 import {Link, Outlet, Route, Routes} from "react-router-dom";
 import {Rubik} from "./pages/Rubik.tsx";
+import {Shaders} from "./pages/Shaders.tsx";
+import {Tests} from "./pages/Tests.tsx";
 
+/*
 function XApp() {
-    /*
-        return (
-            <div className="App">
-                {/!*<WebSocketClientReconnect />*!/}
-                <WsRubikClient />
-            </div>
-        );
-    */
     return (
         <div className="flex flex-col h-screen">
             <div className="bg-gray-800 text-white p-4 fixed top-0 left-0 right-0 z-10">
                 <Header/>
             </div>
             <div className="pt-16 pb-14 flex flex-col overflow-hidden h-full">
-                {/*
+                {/!*
                 <div className="bg-gray-200 p-4">
                     Menu Content (optional)
-                </div> */}
+                </div> *!/}
                 <ApplicationsList/>
-                {/*
+                {/!*
                 <div className="mb-4 p-4">
                     Top Part of Content
                 </div>
@@ -34,7 +29,7 @@ function XApp() {
                 </div>
                 <div className="mt-4 p-4">
                     Bottom Part of Content
-                </div> */}
+                </div> *!/}
             </div>
             <div className="bg-gray-800 text-white p-4 fixed bottom-0 left-0 right-0">
                 <Footer/>
@@ -42,6 +37,7 @@ function XApp() {
         </div>
     )
 }
+*/
 
 export default function App() {
     return (
@@ -57,8 +53,9 @@ export default function App() {
                     <Route index element={<Home/>}/>
                     <Route path="about" element={<About/>}/>
                     <Route path="rubik" element={<Rubik/>}/>
-                    <Route path="shaders" element={<ApplicationsList/>}/>
-                    <Route path="applications" element={<ApplicationsList/>}/>
+                    <Route path="shaders" element={<Shaders/>}/>
+                    <Route path="tests" element={<Tests/>}/>
+                    <Route path="applications" element={<ApplicationsList category="tests"/>}/>
                     {/* Using path="*"" means "match anything", so this route
                         acts like a catch-all for URLs that we don't have explicit
                         routes for. */}
@@ -84,7 +81,7 @@ function Layout() {
                     <Link to="/rubik">Rubik's Cube</Link>
                 </div>
                 <div className="mx-4">
-                    <Link to="/apps">Apps</Link>
+                    <Link to="/tests">Tests</Link>
                 </div>
             </div>
             {/* An <Outlet> renders whatever child route is currently active,
