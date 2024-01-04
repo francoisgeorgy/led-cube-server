@@ -4,6 +4,7 @@ import {loadPreferences, savePreferences} from "./preferences";
 class State {
 
     cube_address: string;
+    rubik_address: string;
     status: string;
     running: string;
     // cube_ip_address: string;
@@ -14,6 +15,7 @@ class State {
         // this.cube_ip_address = prefs.cube_ip;
         // this.cube_port = prefs.cube_port
         this.cube_address = prefs.cube_address;
+        this.rubik_address = prefs.rubik_address;
         this.status = '';
         this.running = '';
         makeAutoObservable(this);
@@ -24,9 +26,13 @@ class State {
     // }
 
     setCubeAddress(a: string) {
-        console.log("State.setCubeAddress", a);
         this.cube_address = a;
         savePreferences({cube_address: this.cube_address});
+    }
+
+    setRubikAddress(a: string) {
+        this.rubik_address = a;
+        savePreferences({rubik_address: this.rubik_address});
     }
 
 /*

@@ -1,15 +1,8 @@
-// import applications from '../applications.json';
 import {useEffect, useState} from "react";
 import {state} from "../State.ts";
 import {observer} from "mobx-react-lite";
 import {running, startScript, stopScript} from "../utils/commands.ts";
-
-interface Application {
-    script: string;     // will be used as key
-    title: string;
-    description: string;
-    requiresConfirmation: boolean;
-}
+import {Application} from "../utils/interfaces.ts";
 
 interface AppDescriptionProps {
     description: string;
@@ -56,7 +49,7 @@ export const ApplicationsList = observer(() => {
         } else {
             console.log(`Launching ${app.title}`);
             // Launch the application
-            startScript(app.script);
+            startScript(app.start_script);
         }
     };
 
@@ -91,9 +84,9 @@ export const ApplicationsList = observer(() => {
             */}
             <div className="flex-1 Xp-4 overflow-auto bg-gray-500">
                 {applications.map(app => (
-                    <div key={app.script} className="p-4 border-b border-black flex flex-col">
-                      <h3 onClick={() => handleClick(app.script)} className="cursor-pointer self-center font-bold text-xl">{app.title}</h3>
-                      {selectedApp === app.script && (
+                    <div key={app.start_script} className="p-4 border-b border-black flex flex-col">
+                      <h3 onClick={() => handleClick(app.start_script)} className="cursor-pointer self-center font-bold text-xl">{app.title}</h3>
+                      {selectedApp === app.start_script && (
                         <>
                             {app.description && <AppDescription description={app.description} className="p-4"/>}
                             <button onClick={() => startApplication(app)}

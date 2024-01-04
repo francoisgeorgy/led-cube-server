@@ -92,6 +92,30 @@ def start_script(script):
         return {"error": str(e)}
 
 
+@app.route('/api/stop/<script>')
+def stop_script(script):
+    """
+    https://stackoverflow.com/questions/4789837/how-to-terminate-a-python-subprocess-launched-with-shell-true/4791612#4791612
+
+    :param script: the filename of the script, without the path
+    :return:
+    """
+    # TODO: rename "callScript"
+    script_path = os.path.join(app.config['scripts_dir'], script)
+    if not os.path.isfile(script_path):
+        response.status = 400
+        return {"error": f"{script_path} does not exist"}
+    try:
+        # subprocess.Popen is non-blocking
+        # The os.setsid() is passed in the argument preexec_fn so
+        # it's run after the fork() and before exec() to run the shell.
+        p = subprocess.Popen(script_path, stdout=subprocess.PIPE, shell=False, preexec_fn=os.setsid)
+        return {"message": f"process {os.getpgid(p.pid)} called"}
+    except Exception as e:
+        response.status = 500
+        return {"error": str(e)}
+
+
 @app.route('/api/stop')
 def stop_current_script():
     """

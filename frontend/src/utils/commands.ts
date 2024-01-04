@@ -17,9 +17,33 @@ export const startScript = async (script: string) => {
         state.setStatus(data?.message ?? '');
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
+        // @ts-expect-error error is not type
         state.setStatus(error.message ?? 'Erreur de communication');
     }
     // console.log("return from sendCommand");
+};
+
+export const stopApplicationScript = async (script: string) => {
+    console.log("enter stopApplicationScript");
+    try {
+        console.log("send command");
+        const response = await fetch(
+            `http://${state.cube_address}/api/stop/${script}`,
+            {mode: "cors"}
+        );
+        console.log("command sent");
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data?.error ?? `${response.status} requête invalide`);
+        }
+        // console.log(data); // Process your data here
+        state.setStatus(data?.message ?? '');
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+        // @ts-expect-error error is not type
+        state.setStatus(error.message ?? 'Erreur de communication');
+    }
+    // console.log("return from stopApplicationScript");
 };
 
 export const stopScript = async () => {
@@ -41,6 +65,7 @@ export const stopScript = async () => {
         state.setStatus(data?.message ?? '');
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
+        // @ts-expect-error error is not type
         state.setStatus(error.message ?? 'Erreur de communication');
     }
     // TODO: review "running" handling.
