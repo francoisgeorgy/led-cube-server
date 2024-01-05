@@ -1,7 +1,7 @@
 import {ApplicationsList} from "../components/ApplicationsList.tsx";
 
-export function Tests() {
+export function Applications() {
     return (
-        <ApplicationsList category="tests"/>
+        <ApplicationsList category="applications"/>
     );
 }

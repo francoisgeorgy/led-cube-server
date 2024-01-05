@@ -106,15 +106,15 @@ const WsRubikClient: React.FC = () => {
                 <button className="self-center bg-blue-600 hover:bg-blue-700 text-xl text-white px-4 py-8 rounded"
                         onClick={() => sendMessage('shuffle')}>Mélanger
                 </button>
+{/*
                 <div className="bg-gray-800 border-1 border border-green-600 rounded p-4 text-center flex items-center justify-center">
                     <span className="text-xl">F'2</span>
                     <span className="text ml-4">(11/21)</span>
                 </div>
-{/*
+*/}
                 <button className="self-center bg-green-600 hover:bg-green-700 text-xl text-white px-4 py-8 rounded"
                         onClick={() => sendMessage('solve')}>Résoudre
                 </button>
-*/}
                 <button className="self-center bg-gray-600 hover:bg-gray-700 text-xl text-white px-4 py-8 rounded"
                         onClick={() => sendMessage('stop')}>Stop
                 </button>

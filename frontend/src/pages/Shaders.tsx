@@ -1,4 +1,4 @@
-import {ApplicationsList} from "./ApplicationsList.tsx";
+import {ApplicationsList} from "../components/ApplicationsList.tsx";
 
 export function Shaders() {
     return (
