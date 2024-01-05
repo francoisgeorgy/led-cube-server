@@ -12,6 +12,5 @@ sudo -E env PATH=$PATH python src/samples/rubik/websockets_rubik.py \
     --led-brightness 30 \
     --led-pixel-mapper=Cube &
 
-echo $! | sudo tee /home/cube/emulator/websockets_rubik.pid
-
-echo "PID is $(cat /home/cube/emulator/websockets_rubik.pid)"
+#echo $! | sudo tee /home/cube/emulator/websockets_rubik.pid
+#echo "PID is $(cat /home/cube/emulator/websockets_rubik.pid)"

@@ -14,6 +14,5 @@ sudo -E env PATH=$PATH python src/samples/${APP}.py \
     --led-brightness 50 \
     --led-pixel-mapper=Cube &
 
-echo $! | sudo tee /home/cube/emulator/${APP}.pid
-
-echo "PID is $(cat /home/cube/emulator/${APP}.pid)"
+#echo $! | sudo tee /home/cube/emulator/${APP}.pid
+#echo "PID is $(cat /home/cube/emulator/${APP}.pid)"

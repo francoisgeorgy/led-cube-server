@@ -25,22 +25,14 @@
 #
 #    sudo kill -9 $PID
 
-#rubik_pid=$(pgrep -f 'websockets_rubik.py' | tail -n 1)
-#
-#if [ -n "$rubik_pid" ]; then
-#    echo "Rubik PID is: $rubik_pid"
-#    sudo kill -9 $rubik_pid
-#else
-#    echo "Aucun process Rubik trouvé."
-#fi
+APP="snow_cube"
 
+app_pid=$(pgrep -f "${APP}.py" | tail -n 1)
 
-rubik_pid=$(pgrep -f 'websockets_rubik.py' | head -n 1)
-
-if [ -n "$rubik_pid" ]; then
-    echo "Rubik PID is: $rubik_pid"
+if [ -n "$app_pid" ]; then
+    echo "${APP} PID is: $app_pid"
     # We use the negative PID value to kill whole process groups. See the kill command documentation for more info.
-    sudo kill -3 -$rubik_pid
+    sudo kill -3 -$app_pid
 else
-    echo "Aucun process Rubik trouvé."
+    echo "Aucun process ${APP} trouvé."
 fi
