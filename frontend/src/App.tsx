@@ -38,7 +38,7 @@ export default function App() {
 
 function Layout() {
     return (
-        <div className="pt-14 pb-14 flex flex-col overflow-hidden h-full">
+        <div className="pt-14 pb-14 flex flex-col overflow-auto h-full">
             <div className="bg-gray-600 py-4 flex">
 {/*
                 <div className="ml-4 mr-2">

@@ -1,6 +1,7 @@
 import {useWebSocket} from "../../useWebSocket.ts";
 import {useState} from "react";
-import {state} from "../../State.ts";
+import {WsRubikAutoCommands} from "./RubikAutoCommands.tsx";
+import {WsRubikManualCommands} from "./RubikManualCommands.tsx";
 
 // const cube_host = "192.168.1.100:5042"
 // const cube_host = "192.168.1.73:5042"
@@ -39,7 +40,7 @@ const WsRubikClient: React.FC = () => {
     // const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.cube_address}/ws`, reconnectCounter);
 
     // const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.rubik_address}/ws`, reconnectCounter);
-    const {connected, status, message, sendMessage} = useWebSocket(`ws://192.168.1.101:5041/ws`, reconnectCounter);
+    const {connected, status, message, sendMessage} = useWebSocket(`ws://192.168.1.73:5041/ws`, reconnectCounter);
 
     /*
         const handleSendStartRequest = () => {
@@ -89,7 +90,7 @@ const WsRubikClient: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col Xh-full">
             {/*
             <div>
                 <select value={url} onChange={handleServerChange}>
@@ -102,26 +103,10 @@ const WsRubikClient: React.FC = () => {
                 </select> {status}
             </div>
 */}
-            <div className="grid justify-center grid-cols-2 gap-4 md:mx-36 my-8">
-                <button className="self-center bg-blue-600 hover:bg-blue-700 text-xl text-white px-4 py-4 rounded"
-                        onClick={() => sendMessage('shuffle')}>Mélanger
-                </button>
-{/*
-                <div className="bg-gray-800 border-1 border border-green-600 rounded p-4 text-center flex items-center justify-center">
-                    <span className="text-xl">F'2</span>
-                    <span className="text ml-4">(11/21)</span>
-                </div>
-*/}
-                <button className="self-center bg-green-600 hover:bg-green-700 text-xl text-white px-4 py-4 rounded"
-                        onClick={() => sendMessage('solve')}>Résoudre
-                </button>
-                <button className="self-center bg-gray-600 hover:bg-gray-700 text-xl text-white px-4 py-4 rounded"
-                        onClick={() => sendMessage('stop')}>Stop
-                </button>
-                <button className="self-center bg-red-700 hover:bg-red-800 text-xl text-white px-4 py-4 rounded"
-                        onClick={() => sendMessage('reset')}>Reset
-                </button>
-            </div>
+
+            {mode == "auto" && <WsRubikAutoCommands sendMessage={sendMessage} />}
+            {mode == "manual" && <WsRubikManualCommands sendMessage={sendMessage} />}
+
             <div className="my-4 text-center">
                 {mode == "auto" &&
                 <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"

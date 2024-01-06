@@ -5,6 +5,11 @@ interface MyMessageData {
     // ... other properties
 }
 
+export interface MessageToCube {
+    command: string;
+    parameters?: any;
+}
+
 export const useWebSocket = (url: string, reconnectCounter: unknown) => {
 
     // console.log(reconnectCounter);
@@ -112,9 +117,10 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
         };
     }, [connect, reconnectCounter]);
 
-    const sendMessage = useCallback((message: string, parameters: unknown = null) => {
+    const sendMessage = useCallback((message: MessageToCube) => {
+        console.log("useWebSocket.sendMessage", message);
         if (ws.current && ws.current.readyState === WebSocket.OPEN) {
-            ws.current.send(JSON.stringify({"command": message, 'parameters': parameters == null ? undefined : parameters}));
+            ws.current.send(JSON.stringify({"command": message.command, 'parameters': message.parameters == null ? undefined : message.parameters}));
         }
     }, [ws.current]);
 

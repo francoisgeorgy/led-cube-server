@@ -1,0 +1,36 @@
+.faces,
+.movements,
+.scramble {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(100px, 200px));
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    justify-content: center;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.faces {
+    grid-template-rows: repeat(4, minmax(30px, 60px));
+}
+
+.movements {
+    grid-template-rows: repeat(1, minmax(30px, 60px));
+}
+
+.scramble {
+    grid-template-rows: repeat(1, minmax(30px, 60px));
+}
+
+.face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    /*font-size: 3em;*/
+    border: 1px solid #666;
+    /*height: 60px;*/
+    /*background-color: deepskyblue;*/
+    background-color: #5b5a5a;
+    border-radius: 6px;
+}
