@@ -76,7 +76,7 @@ const WsRubikClient: React.FC = () => {
     };
 
     const setModeInter = () => {
-        setMode("inter");
+        setMode("manual");
     };
 
     const setModeDemo = () => {
@@ -102,8 +102,8 @@ const WsRubikClient: React.FC = () => {
                 </select> {status}
             </div>
 */}
-            <div className="grid justify-center grid-cols-2 gap-8 md:mx-36 mx-8 my-16">
-                <button className="self-center bg-blue-600 hover:bg-blue-700 text-xl text-white px-4 py-8 rounded"
+            <div className="grid justify-center grid-cols-2 gap-4 md:mx-36 my-8">
+                <button className="self-center bg-blue-600 hover:bg-blue-700 text-xl text-white px-4 py-4 rounded"
                         onClick={() => sendMessage('shuffle')}>Mélanger
                 </button>
 {/*
@@ -112,21 +112,21 @@ const WsRubikClient: React.FC = () => {
                     <span className="text ml-4">(11/21)</span>
                 </div>
 */}
-                <button className="self-center bg-green-600 hover:bg-green-700 text-xl text-white px-4 py-8 rounded"
+                <button className="self-center bg-green-600 hover:bg-green-700 text-xl text-white px-4 py-4 rounded"
                         onClick={() => sendMessage('solve')}>Résoudre
                 </button>
-                <button className="self-center bg-gray-600 hover:bg-gray-700 text-xl text-white px-4 py-8 rounded"
+                <button className="self-center bg-gray-600 hover:bg-gray-700 text-xl text-white px-4 py-4 rounded"
                         onClick={() => sendMessage('stop')}>Stop
                 </button>
-                <button className="self-center bg-red-700 hover:bg-red-800 text-xl text-white py-8 px-4 rounded"
+                <button className="self-center bg-red-700 hover:bg-red-800 text-xl text-white px-4 py-4 rounded"
                         onClick={() => sendMessage('reset')}>Reset
                 </button>
             </div>
             <div className="my-4 text-center">
                 {mode == "auto" &&
                 <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"
-                                       onClick={setModeInter}>Passer en mode interactif</button>}
-                {mode == "inter" &&
+                                       onClick={setModeInter}>Passer en mode manuel</button>}
+                {mode == "manual" &&
                 <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"
                                        onClick={setModeAuto}>Passer en mode automatique</button>}
                 {mode == "demo" &&

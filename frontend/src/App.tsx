@@ -11,6 +11,7 @@ import {Applications} from "./pages/Applications.tsx";
 import {About} from "./pages/About.tsx";
 import {Home} from "./pages/Home.tsx";
 import {NotFound} from "./pages/NotFound.tsx";
+import {WsExample} from "./pages/WsExample.tsx";
 
 export default function App() {
     return (
@@ -20,12 +21,13 @@ export default function App() {
             </div>
             <Routes>
                 <Route path="/" element={<Layout/>}>
-                    <Route index element={<Home/>}/>
-                    <Route path="about" element={<About/>}/>
+                    {/*<Route index element={<Home/>}/>*/}
+                    {/*<Route path="about" element={<About/>}/>*/}
                     <Route path="rubik" element={<Rubik/>}/>
                     <Route path="shaders" element={<Shaders/>}/>
                     <Route path="applications" element={<Applications/>}/>
                     <Route path="tests" element={<Tests/>}/>
+                    <Route path="wsexample" element={<WsExample/>}/>
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>
                 </Route>
@@ -36,22 +38,27 @@ export default function App() {
 
 function Layout() {
     return (
-        <div className="pt-16 pb-14 flex flex-col overflow-hidden h-full">
+        <div className="pt-14 pb-14 flex flex-col overflow-hidden h-full">
             <div className="bg-gray-600 py-4 flex">
-                <div className="mx-4">
+{/*
+                <div className="ml-4 mr-2">
                     <Link to="/">Home</Link>
                 </div>
-                <div className="mx-4">
+*/}
+                <div className="ml-4 mr-2">
                     <Link to="/shaders">Shaders</Link>
                 </div>
-                <div className="mx-4">
+                <div className="mx-2">
                     <Link to="/rubik">Rubik</Link>
                 </div>
-                <div className="mx-4">
+                <div className="mx-2">
                     <Link to="/applications">Apps</Link>
                 </div>
-                <div className="mx-4">
+                <div className="mx-2">
                     <Link to="/tests">Tests</Link>
+                </div>
+                <div className="mx-2">
+                    <Link to="/wsexample">WS</Link>
                 </div>
             </div>
             {/* An <Outlet> renders whatever child route is currently active. */}

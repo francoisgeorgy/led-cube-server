@@ -37,7 +37,7 @@ export const ServerSelector = observer(() => {
 
     return (
         <div className="flex">
-            <select value={state.cube_address} onChange={handleServerChange}>
+            <select value={state.cube_address} onChange={handleServerChange} className="px-2">
                 <option value="">Select Server</option>
                 {serverOptions.map((option, index) => (
                     <option key={index} value={option.url}>
@@ -45,10 +45,14 @@ export const ServerSelector = observer(() => {
                     </option>
                 ))}
             </select>
+{/*
             <div className="mx-4">
                 {connected ? 'OK' : '--'}
             </div>
-            <button onClick={forceReconnect}>R</button>
+*/}
+            <div className="ml-2">
+                <button onClick={forceReconnect}>R</button>
+            </div>
         </div>
     );
 });

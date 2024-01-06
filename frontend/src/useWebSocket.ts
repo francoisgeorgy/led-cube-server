@@ -7,7 +7,7 @@ interface MyMessageData {
 
 export const useWebSocket = (url: string, reconnectCounter: unknown) => {
 
-    console.log(reconnectCounter);
+    // console.log(reconnectCounter);
 
     const ws = useRef<WebSocket | null>(null);
     // const [websocket, setWebsocket] = useState(null);
@@ -19,6 +19,9 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
 
     // const [messages, setMessages] = useState([]);
     const [connected, setConnected] = useState(false);
+
+    // const isMounted = useRef<boolean>(true);
+    const reconnectionTimeout = useRef(-1);
 
     const reconnectInterval = 3000; // Time in milliseconds to wait for reconnection
     const maxReconnectAttempts = 3; // Maximum number of reconnection attempts
@@ -47,6 +50,10 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
     //
     const connect = useCallback(() => {
 
+        // if (!isMounted.current) {
+        //     return; // Do not attempt to connect if the component is unmounted
+        // }
+
         ws.current = new WebSocket(url);
 
         ws.current.onopen = () => {
@@ -73,14 +80,14 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
             setConnected(false);
             // console.log('WebSocket.onClose: connected set to false');
             if (reconnectAttempts < maxReconnectAttempts) {
-                console.log('onClose: Attempting to reconnect...', reconnectAttempts);
+                console.log('useWebSocket.onClose: trying to reconnect...', reconnectAttempts);
                 setStatus(`trying to connect... (${reconnectAttempts+1}/${maxReconnectAttempts})`);
-                setTimeout(() => {
+                reconnectionTimeout.current = setTimeout(() => {
                     connect();
                     reconnectAttempts++;
                 }, reconnectInterval);
             } else {
-                console.log('onClose: Max reconnect attempts reached, not attempting further reconnects');
+                console.log('useWebSocket.onClose: max reconnect attempts reached, not attempting further reconnects');
                 setStatus(`unable to connect`);
                 reconnectAttempts = 0; // Reset reconnect attempts for the case if the user force a reconnection
             }
@@ -93,6 +100,11 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
         connect();
         return () => {
             console.log("cleanup")
+            // isMounted.current = false; // Set to false when the component is unmounted
+            if (reconnectionTimeout.current) {
+                console.log("clear reconnection timeout");
+                clearTimeout(reconnectionTimeout.current);
+            }
             if (ws.current) {
                 console.log("ws.current.close()");
                 ws.current.close();
@@ -100,10 +112,9 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
         };
     }, [connect, reconnectCounter]);
 
-    const sendMessage = useCallback((message: string) => {
+    const sendMessage = useCallback((message: string, parameters: unknown = null) => {
         if (ws.current && ws.current.readyState === WebSocket.OPEN) {
-            console.log("send message", message)
-            ws.current.send(JSON.stringify({"command": message}));
+            ws.current.send(JSON.stringify({"command": message, 'parameters': parameters == null ? undefined : parameters}));
         }
     }, [ws.current]);
 

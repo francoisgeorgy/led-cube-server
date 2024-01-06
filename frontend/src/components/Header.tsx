@@ -15,7 +15,7 @@ export const Header = observer(() => {
 
     return (
         <div className="flex space-x-4 justify-between">
-            <div>LED Cube</div>
+            <div className="text-yellow-300 font-bold">LED Cube</div>
             <ServerSelector />
         </div>
     )

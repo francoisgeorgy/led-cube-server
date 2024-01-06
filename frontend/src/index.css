@@ -7,8 +7,9 @@
   /*line-height: 1.5;*/
   /*font-weight: 400;*/
 
-  color-scheme: dark light;
+  /*color-scheme: dark light;*/
   /*color: rgba(255, 255, 255, 0.87);*/
+    color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -34,6 +35,10 @@ body {
   /*min-width: 320px;*/
   min-height: 100vh;
   /*color: #eee;*/
+}
+
+input, select {
+    background-color: #666666;
 }
 
 input.invalid {

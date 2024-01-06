@@ -36,10 +36,15 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
     const [special, setSpecial] = useState<boolean>(false);
 
     const fetchRunningStatus = async () => {
+        console.log("ApplicationsList.fetchRunningStatus");
         try {
-            const response = await fetch(`http://${state.cube_address}/api/running`);
+            const response = await fetch(
+                `http://${state.cube_address}/api/running`,
+                {mode: "cors"}
+            );
             const data = await response.json();
-            // console.log("data.running", data.running)
+            // console.log("fetchRunningStatus: response", response)
+            // console.log("fetchRunningStatus: data", data)
             setRunningStatus(data.running);
         } catch (error) {
             console.error('Error fetching running status', error);
