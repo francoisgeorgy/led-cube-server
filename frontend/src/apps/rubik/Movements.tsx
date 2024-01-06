@@ -8,9 +8,9 @@ interface WsRubikMovementsProps {
 export function Movements({sendMessage} : WsRubikMovementsProps) {
     return (
         <div className="movements">
-            <Button name="CCW" onClick={() => sendMessage({command: 'ccw'})} />
-            <Button name="CW &#10226;" onClick={() => sendMessage({command: 'cw'})} />
-            <Button name="180" onClick={() => sendMessage({command: '180'})} />
+            <Button name="90 G" onClick={() => sendMessage({command: 'move', parameters: 'ccw'})} />
+            <Button name="90 D" onClick={() => sendMessage({command: 'move', parameters: 'cw'})} />
+            <Button name="180" onClick={() => sendMessage({command: 'move', parameters: '180'})} />
         </div>
     )
 }

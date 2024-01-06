@@ -1,39 +1,30 @@
-// import {SetStateAction, useState} from "react";
 import {state} from "../State.ts";
 import {observer} from "mobx-react-lite";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 
 interface ServerOption {
     label: string;
-    url: string;
+    host: string;
+    port_http: number;   // API web classique
+    port_ws: number;     // API websockets
 }
 
-// export function ServerSelector() {
 export const ServerSelector = observer(() => {
 
     const serverOptions: ServerOption[] = [
-        {label: '192.168.1.73', url: '192.168.1.73:5040'},
-        {label: '192.168.1.100', url: '192.168.1.100:5040'},
-        {label: '192.168.1.101', url: '192.168.1.101:5040'},
+        {label: '192.168.1.73', host: '192.168.1.73', port_http: 5040, port_ws: 5041},
+        {label: '192.168.1.100', host: '192.168.1.100', port_http: 5040, port_ws: 5041},
+        {label: '192.168.1.101', host: '192.168.1.101:', port_http: 5040, port_ws: 5041},
     ];
-
-    // const [url, setUrl] = useState<string>('');
-    // const [reconnectCounter, setReconnectCounter] = useState(0);
-    // const {connected, status, message, sendMessage} = useWebSocket(url, reconnectCounter);
-
-    // const [runningStatus, setRunningStatus] = useState('');
 
     const fetchRunningStatus = async () => {
         console.log("ApplicationsList.fetchRunningStatus");
         try {
             const response = await fetch(
-                `http://${state.cube_address}/api/running`,
+                `http://${state.cube_host}:${state.port_http}/api/running`,
                 {mode: "cors"}
             );
             const data = await response.json();
-            // console.log("fetchRunningStatus: response", response)
-            // console.log("fetchRunningStatus: data", data)
-            // setRunningStatus(data.running);
 
             state.setAlive(true);
 
@@ -69,11 +60,12 @@ export const ServerSelector = observer(() => {
     }, [state.cube_address]);
 */
 
-    const handleServerChange = (e: any) => {
-        console.log("handleServerChange", e.target.value);
-        // setUrl(e.target.value);
-        if (e.target.value) {
-            state.setCubeAddress(e.target.value);
+    const handleServerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const c = serverOptions.find(o => o.label == e.target.value)
+        if (c) {
+            state.setCubeHost(c.host);
+            state.setPortHttp(c.port_http);
+            state.setPortWs(c.port_ws);
         }
     };
 
@@ -86,10 +78,10 @@ export const ServerSelector = observer(() => {
 
     return (
         <div className="flex">
-            <select value={state.cube_address} onChange={handleServerChange} className="px-2">
+            <select value={state.cube_host} onChange={handleServerChange} className="px-2">
                 <option value="">Select Server</option>
                 {serverOptions.map((option, index) => (
-                    <option key={index} value={option.url}>
+                    <option key={index} value={option.label}>
                         {option.label}
                     </option>
                 ))}

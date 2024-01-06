@@ -1,4 +1,4 @@
-import WsExampleClient from "../apps/rubik/WsExampleClient.tsx";
+import {WsExampleClient} from "../apps/color/WsExampleClient.tsx";
 import {ApplicationHeader} from "../components/ApplicationHeader.tsx";
 import {APP_COLORS} from "../utils/applications.ts";
 

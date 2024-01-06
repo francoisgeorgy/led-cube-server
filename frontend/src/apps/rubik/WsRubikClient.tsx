@@ -2,75 +2,14 @@ import {useWebSocket} from "../../useWebSocket.ts";
 import {useState} from "react";
 import {WsRubikAutoCommands} from "./RubikAutoCommands.tsx";
 import {WsRubikManualCommands} from "./RubikManualCommands.tsx";
+import {state} from "../../State.ts";
+import {observer} from "mobx-react-lite";
 
-// const cube_host = "192.168.1.100:5042"
-// const cube_host = "192.168.1.73:5042"
-
-/*
-const sendStartRequest = async () => {
-    console.log("enter sendCommand");
-    try {
-        console.log("send command");
-        const response = await fetch(
-            `http://localhost:8042/start`,
-            {mode: "no-cors"}
-        );
-        console.log("command sent");
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
-    console.log("return from sendStartRequest");
-};
-*/
-
-// interface ServerOption {
-//     label: string;
-//     url: string;
-// }
-
-const WsRubikClient: React.FC = () => {
+export const WsRubikClient = observer(() => {
 
     const [mode, setMode] = useState<string>("auto");
-
-    // const [url, setUrl] = useState<string>(`ws://${state.cube_address}/ws`);
     const [reconnectCounter, setReconnectCounter] = useState(0);
-    // const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.cube_address}/ws`, reconnectCounter);
-
-    // const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.rubik_address}/ws`, reconnectCounter);
-    const {connected, status, message, sendMessage} = useWebSocket(`ws://192.168.1.73:5041/ws`, reconnectCounter);
-
-    /*
-        const handleSendStartRequest = () => {
-            sendStartRequest();
-        };
-
-        const handleSendStartCommand = () => {
-            sendMessage('start');
-        };
-
-        const handleSendStop = () => {
-            sendMessage('stop');
-        };
-    */
-
-/*
-    const serverOptions: ServerOption[] = [
-        {label: '192.168.1.73', url: 'ws://192.168.1.73:5042/ws'},
-        {label: '192.168.1.100', url: 'ws://192.168.1.100:5042/ws'},
-        {label: '192.168.1.101', url: 'ws://192.168.1.101:5042/ws'},
-    ];
-
-    const handleServerChange = (e: { target: { value: SetStateAction<string>; }; }) => {
-        setUrl(e.target.value);
-        // if (webSocket) {
-        //   webSocket.close();
-        // }
-    };
-*/
-
+    const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.cube_host}:${state.port_ws}/ws`, reconnectCounter);
 
     const setModeAuto = () => {
         setMode("auto");
@@ -90,19 +29,7 @@ const WsRubikClient: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col Xh-full">
-            {/*
-            <div>
-                <select value={url} onChange={handleServerChange}>
-                    <option value="">Select Server</option>
-                    {serverOptions.map((option, index) => (
-                      <option key={index} value={option.url}>
-                        {option.label}
-                      </option>
-                    ))}
-                </select> {status}
-            </div>
-*/}
+        <div className="flex flex-col">
 
             {mode == "auto" && <WsRubikAutoCommands sendMessage={sendMessage} />}
             {mode == "manual" && <WsRubikManualCommands sendMessage={sendMessage} />}
@@ -118,7 +45,7 @@ const WsRubikClient: React.FC = () => {
                 <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"
                                        onClick={setModeDemo}>Passer en mode démo</button>}
             </div>
-            <div className="Xflex border-t border-blue-400 pt-2 my-4">
+            <div className="border-t border-blue-400 pt-2 my-4">
                 <div className="mb-4">
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}
                 </div>
@@ -133,13 +60,6 @@ const WsRubikClient: React.FC = () => {
                     {message}
                 </div>
             </div>
-            {/*
-            <div>
-                <button onClick={handleSendStop}>send stop</button>
-            </div>
-*/}
         </div>
     );
-};
-
-export default WsRubikClient;
+});

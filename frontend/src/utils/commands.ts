@@ -5,7 +5,7 @@ export const startScript = async (category: string, script: string) => {
     try {
         console.log("send command");
         const response = await fetch(
-            `http://${state.cube_address}/api/start/${category}/${script}`,
+            `http://${state.cube_host}:${state.port_http}/api/start/${category}/${script}`,
             {mode: "cors"}
         );
         console.log("command sent");
@@ -30,7 +30,7 @@ export const stopApplicationScript = async (category: string, script: string) =>
     try {
         console.log("send command");
         const response = await fetch(
-            `http://${state.cube_address}/api/stop/${category}/${script}`,
+            `http://${state.cube_host}:${state.port_http}/api/stop/${category}/${script}`,
             {mode: "cors"}
         );
         console.log("command sent");
@@ -53,7 +53,7 @@ export const stopScript = async () => {
     try {
         console.log("send command");
         const response = await fetch(
-            `http://${state.cube_address}/api/stop`,
+            `http://${state.cube_host}:${state.port_http}/api/stop`,
             {mode: "cors"}
         );
         // console.log("command sent");
@@ -80,7 +80,7 @@ export const running = async () => {
     try {
         console.log("send command");
         const response = await fetch(
-            `http://${state.cube_address}/api/running`,
+            `http://${state.cube_host}:${state.port_http}/api/running`,
             {mode: "cors"}
         );
          const data = await response.json();

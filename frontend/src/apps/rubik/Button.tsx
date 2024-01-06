@@ -2,11 +2,12 @@
 interface ButtonProps {
     name: string;
     onClick: () => void;
+    disabled?: boolean;
     // command: string;
     // sendMessage: (message: MessageToCube) => void;
 }
 
-export function Button({name, onClick}: ButtonProps) {
+export function Button({name, onClick, disabled=false}: ButtonProps) {
 
     // 11:08:47.051 Face.tsx:12 enter handleClick
     // 11:08:47.051 cube.ts:4 enter sendCommand
@@ -28,12 +29,20 @@ export function Button({name, onClick}: ButtonProps) {
     };
 */
 
-    return (
-        <div className="face" onClick={onClick}>
-            {/*<div className="text-3xl font-bold">{name}</div>*/}
-            {name}
-        </div>
-    )
+    if (disabled) {
+        return (
+            <div className="face disabled">
+                {name}
+            </div>
+        )
+    } else {
+        return (
+            <div className="face" onClick={onClick}>
+                {name}
+            </div>
+        )
+    }
+
     // return (
     //     <div className="face" onClick={async () => {
     //         sendCommand("face", "U");

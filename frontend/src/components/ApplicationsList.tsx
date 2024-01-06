@@ -31,11 +31,11 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
 
     useEffect(() => {
         console.log("ApplicationsList", category);
-        fetch(`http://${state.cube_address}/api/applications/${category}`)
+        fetch(`http://${state.cube_host}:${state.port_http}/api/applications/${category}`)
             .then(response => response.json())
             .then(data => setApplications(data as Application[]))
             .catch(error => console.error('Error fetching data: ', error));
-    }, [state.cube_address]);
+    }, [state.cube_host, state.port_http]);
 
     const handleClick = (title: string) => {
         setSpecial(false);
@@ -51,7 +51,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
         } else {
             console.log(`Launching ${app.title}`);
             // Launch the application
-            let b = await startScript(category, app.start_script);
+            const b = await startScript(category, app.start_script);
             // console.log('startScript result:', b);
             if (b) {
                 setSelectedApp(null);
@@ -86,11 +86,6 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
 
     return (
         <>
-            {/*
-            <div className="p-4">
-                Top Part of Content
-            </div>
-            */}
             <div className="flex-1 Xp-4 overflow-auto bg-gray-500">
                 {applications.map(app => (
                     <div key={app.start_script} className="p-4 border-b border-black flex flex-col">
@@ -107,7 +102,6 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
                     </div>
                 ))}
             </div>
-            {/*If the main content above does not fill the height, it is possible to put a div at the bottom with : */}
             {state.running &&
                 <div className="p-4 border-t border-black bg-orange-700 text-center flex justify-between">
                     <div>{state.running}</div>
@@ -123,12 +117,12 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
                         </>
                     )}
                 </div>
-*/}
+            */}
             {/*
             <div className="p-4 border-t border-black bg-orange-700">
                 <div>Reboot</div>
             </div>
-*/}
+            */}
         </>
     )
 });
