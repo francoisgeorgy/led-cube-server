@@ -5,6 +5,7 @@ class State {
 
     cube_address: string;
     rubik_address: string;
+    alive: boolean;
     status: string;
     running: string;
     // cube_ip_address: string;
@@ -16,6 +17,7 @@ class State {
         // this.cube_port = prefs.cube_port
         this.cube_address = prefs.cube_address;
         this.rubik_address = prefs.rubik_address;
+        this.alive = false;
         this.status = '';
         this.running = '';
         makeAutoObservable(this);
@@ -33,6 +35,10 @@ class State {
     setRubikAddress(a: string) {
         this.rubik_address = a;
         savePreferences({rubik_address: this.rubik_address});
+    }
+
+    setAlive(b: boolean) {
+        this.alive = b;
     }
 
 /*

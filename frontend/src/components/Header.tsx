@@ -1,21 +1,17 @@
 import {observer} from "mobx-react-lite";
-// import {Port} from "./Port.tsx";
 import {ServerSelector} from "./ServerSelector.tsx";
-
-// function validateIpAddress(addr: string) {
-//     return /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/.test(addr);
-// }
+import {state} from "../State.ts";
 
 export const Header = observer(() => {
 
-    // function handleIpChange(e: React.FormEvent<HTMLInputElement>) {
-    //     const v = e.currentTarget.value;
-    //     state.setCubeIpAddress(v);
-    // }
-
     return (
         <div className="flex space-x-4 justify-between">
-            <div className="text-yellow-300 font-bold">LED Cube</div>
+            {/*<div className={state.alive ? 'text-yellow-300 font-bold' : 'text-white'}>LED Cube</div>*/}
+            <div className={state.alive ?
+                "px-4 h-7 flex justify-center items-center text-sky-200 font-bold border-1 rounded-lg border-sky-200 shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#08f,0_0_15px_#08f,0_0_30px_#08f]" :
+                "px-4 h-7 flex justify-center items-center text-sky-300 border border-1 rounded-lg border-sky-500"}
+            >
+                LED Cube</div>
             <ServerSelector />
         </div>
     )
