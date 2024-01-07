@@ -3,7 +3,7 @@ import {Application} from "./interfaces.ts";
 export const APP_COLORS: Application = {
     start_script: 'start-colors-websockets.sh',
     stop_script: 'stop-colors-websockets.sh',
-    title: 'Couleurs',
+    title: 'Couleur',
     description: 'Changer la couleur du cube',
     requiresConfirmation: false
 }

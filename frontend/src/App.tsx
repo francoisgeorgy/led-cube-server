@@ -1,17 +1,15 @@
-import './App.css'
-import './apps/rubik/cube.css'
 import {Header} from "./components/Header.tsx";
-import {ApplicationsList} from "./components/ApplicationsList.tsx";
 import {Footer} from "./components/Footer.tsx";
 import {Link, Outlet, Route, Routes} from "react-router-dom";
 import {Rubik} from "./pages/Rubik.tsx";
 import {Shaders} from "./pages/Shaders.tsx";
 import {Tests} from "./pages/Tests.tsx";
 import {Applications} from "./pages/Applications.tsx";
-import {About} from "./pages/About.tsx";
-import {Home} from "./pages/Home.tsx";
 import {NotFound} from "./pages/NotFound.tsx";
 import {Color} from "./pages/Color.tsx";
+import './App.css'
+import './apps/rubik/cube.css'
+import {Menu} from "./pages/Menu.tsx";
 
 export default function App() {
     return (
@@ -21,13 +19,13 @@ export default function App() {
             </div>
             <Routes>
                 <Route path="/" element={<Layout/>}>
-                    {/*<Route index element={<Home/>}/>*/}
-                    {/*<Route path="about" element={<About/>}/>*/}
+                    <Route index element={<Menu/>}/>
+                    {/*<Route path="menu" element={<Menu/>}/>*/}
                     <Route path="rubik" element={<Rubik/>}/>
                     <Route path="shaders" element={<Shaders/>}/>
                     <Route path="applications" element={<Applications/>}/>
                     <Route path="tests" element={<Tests/>}/>
-                    <Route path="wsexample" element={<Color/>}/>
+                    <Route path="color" element={<Color/>}/>
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>
                 </Route>
@@ -39,12 +37,8 @@ export default function App() {
 function Layout() {
     return (
         <div className="pt-14 pb-14 flex flex-col overflow-auto h-full">
-            <div className="bg-gray-600 py-4 flex">
 {/*
-                <div className="ml-4 mr-2">
-                    <Link to="/">Home</Link>
-                </div>
-*/}
+            <div className="bg-gray-600 py-4 flex">
                 <div className="ml-4 mr-2">
                     <Link to="/shaders">Shaders</Link>
                 </div>
@@ -61,6 +55,7 @@ function Layout() {
                     <Link to="/wsexample">WS</Link>
                 </div>
             </div>
+*/}
             {/* An <Outlet> renders whatever child route is currently active. */}
             <Outlet/>
             <div className="bg-gray-800 text-white p-4 fixed bottom-0 left-0 right-0">
