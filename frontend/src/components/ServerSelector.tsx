@@ -12,14 +12,15 @@ interface ServerOption {
 export const ServerSelector = observer(() => {
 
     const serverOptions: ServerOption[] = [
-        {label: '192.168.1.73', host: '192.168.1.73', port_http: 5040, port_ws: 5041},
-        {label: '192.168.1.100', host: '192.168.1.100', port_http: 5040, port_ws: 5041},
-        {label: '192.168.1.101', host: '192.168.1.101:', port_http: 5040, port_ws: 5041},
+        {label: 'm2', host: '192.168.1.73', port_http: 5040, port_ws: 5041},
+        {label: 'pi-e1-12', host: '192.168.1.100', port_http: 5040, port_ws: 5041},
+        {label: 'pi-de-e0', host: '192.168.1.101', port_http: 5040, port_ws: 5041},
     ];
 
     const fetchRunningStatus = async () => {
-        console.log("ApplicationsList.fetchRunningStatus");
         try {
+            console.log("fetchRunningStatus", state.cube_host, state.port_http);
+
             const response = await fetch(
                 `http://${state.cube_host}:${state.port_http}/api/running`,
                 {mode: "cors"}
@@ -32,13 +33,15 @@ export const ServerSelector = observer(() => {
                 console.warn("unexpected response", response.status)
                 state.setRunning('');
             } else if (Object.prototype.hasOwnProperty.call(data, 'running')) {
+                console.log("running: ", data.running)
                 state.setRunning(data.running);
             } else {
                 console.warn("unexpected response", data)
                 state.setRunning('');
             }
         } catch (error) {
-            console.error('Error fetching running status', error);
+            // console.error('Error fetching running status', error);
+            state.setRunning('');
             state.setAlive(false);
         }
     };
@@ -48,52 +51,41 @@ export const ServerSelector = observer(() => {
             fetchRunningStatus();
         }, 1000);
         return () => clearInterval(interval); // This is the clean-up function
-    }, []);
-
-/*
-    useEffect(() => {
-        console.log("ApplicationsList", category);
-        fetch(`http://${state.cube_address}/api/applications/${category}`)  // Adjust the URL/port as necessary
-            .then(response => response.json())
-            .then(data => setApplications(data as Application[]))
-            .catch(error => console.error('Error fetching data: ', error));
-    }, [state.cube_address]);
-*/
+    }, [state.cube_host, state.port_http]);
 
     const handleServerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        console.log("handleServerChange", e.target.value);
         const c = serverOptions.find(o => o.label == e.target.value)
         if (c) {
+            console.log("handleServerChange set", c.host, c.port_http, c.port_ws);
             state.setCubeHost(c.host);
             state.setPortHttp(c.port_http);
             state.setPortWs(c.port_ws);
         }
     };
 
+/*
     const forceReconnect = () => {
         console.log("forceReconnect");
         // setReconnectCounter((prev) => prev + 1); // Increment to trigger reconnection
     };
-
-    // let connected = true;
+*/
 
     return (
         <div className="flex">
             <select value={state.cube_host} onChange={handleServerChange} className="px-2">
                 <option value="">Select Server</option>
                 {serverOptions.map((option, index) => (
-                    <option key={index} value={option.label}>
+                    <option key={index} value={option.host}>
                         {option.label}
                     </option>
                 ))}
             </select>
 {/*
-            <div className="mx-4">
-                {connected ? 'OK' : '--'}
-            </div>
-*/}
             <div className="ml-2">
                 <button onClick={forceReconnect}>R</button>
             </div>
+*/}
         </div>
     );
 });

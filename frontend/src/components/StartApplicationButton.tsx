@@ -9,6 +9,7 @@ export function StartApplicationButton({application}: CommandButtonProps) {
 
     const startApplication = (app: Application) => {
         if (app.requiresConfirmation) {
+            // TODO: handle requiresConfirmation
             if (window.confirm(`Launch ${app.title}?`)) {
                 console.log(`Launching ${app.title}`);
                 // Launch the application
@@ -16,7 +17,7 @@ export function StartApplicationButton({application}: CommandButtonProps) {
         } else {
             console.log(`Launching ${app.title}`);
             // Launch the application
-            startScript(app.start_script);
+            startScript(app.category, app.start_script);
         }
     };
 

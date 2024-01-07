@@ -1,15 +1,15 @@
 import {Header} from "./components/Header.tsx";
 import {Footer} from "./components/Footer.tsx";
-import {Link, Outlet, Route, Routes} from "react-router-dom";
+import {Outlet, Route, Routes} from "react-router-dom";
 import {Rubik} from "./pages/Rubik.tsx";
 import {Shaders} from "./pages/Shaders.tsx";
 import {Tests} from "./pages/Tests.tsx";
 import {Applications} from "./pages/Applications.tsx";
 import {NotFound} from "./pages/NotFound.tsx";
 import {Color} from "./pages/Color.tsx";
-import './App.css'
-import './apps/rubik/cube.css'
 import {Menu} from "./pages/Menu.tsx";
+import {Snow} from "./pages/Snow.tsx";
+import './App.css'
 
 export default function App() {
     return (
@@ -23,6 +23,7 @@ export default function App() {
                     {/*<Route path="menu" element={<Menu/>}/>*/}
                     <Route path="rubik" element={<Rubik/>}/>
                     <Route path="shaders" element={<Shaders/>}/>
+                    <Route path="snow" element={<Snow/>}/>
                     <Route path="applications" element={<Applications/>}/>
                     <Route path="tests" element={<Tests/>}/>
                     <Route path="color" element={<Color/>}/>

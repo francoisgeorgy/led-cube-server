@@ -15,13 +15,13 @@ export const startScript = async (category: string, script: string) => {
         }
         // console.log(data); // Process your data here
         state.setStatus(data?.message ?? '');
-        return true;
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
         // @ts-expect-error error is not type
         state.setStatus(error.message ?? 'Erreur de communication');
         return false;
     }
+    return true;
     // console.log("return from sendCommand");
 };
 
@@ -44,7 +44,9 @@ export const stopApplicationScript = async (category: string, script: string) =>
         console.error('There was a problem with the fetch operation:', error);
         // @ts-expect-error error is not type
         state.setStatus(error.message ?? 'Erreur de communication');
+        return false;
     }
+    return true;
     // console.log("return from stopApplicationScript");
 };
 
@@ -58,8 +60,8 @@ export const stopScript = async () => {
         );
         // console.log("command sent");
         // console.log(response);
-         const data = await response.json();
-         console.log(data);
+        const data = await response.json();
+        console.log(data);
         if (!response.ok) {
             throw new Error(data?.error ?? `${response.status} requête invalide`);
         }
@@ -69,12 +71,15 @@ export const stopScript = async () => {
         console.error('There was a problem with the fetch operation:', error);
         // @ts-expect-error error is not type
         state.setStatus(error.message ?? 'Erreur de communication');
+        return false;
     }
     // TODO: review "running" handling.
     state.setRunning('');
     // console.log("return from sendCommand");
+    return true;
 };
 
+/*
 export const running = async () => {
     console.log("enter sendCommand");
     try {
@@ -95,3 +100,4 @@ export const running = async () => {
     }
     // console.log("return from sendCommand");
 };
+*/

@@ -4,6 +4,6 @@ import {state} from "../State.ts";
 export const Footer = observer(() => {
 
     return (
-        <div>{state.status}</div>
+        <div>Actif: {state.running}</div>
     )
 });

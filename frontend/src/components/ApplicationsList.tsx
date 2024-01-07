@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {state} from "../State.ts";
 import {observer} from "mobx-react-lite";
-import {running, startScript, stopScript} from "../utils/commands.ts";
+import {startScript, stopScript} from "../utils/commands.ts";
 import {Application} from "../utils/interfaces.ts";
 
 interface AppDescriptionProps {
@@ -27,7 +27,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
 
     const [applications, setApplications] = useState<Application[]>([]);
 
-    const [special, setSpecial] = useState<boolean>(false);
+    // const [special, setSpecial] = useState<boolean>(false);
 
     useEffect(() => {
         console.log("ApplicationsList", category);
@@ -38,7 +38,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
     }, [state.cube_host, state.port_http]);
 
     const handleClick = (title: string) => {
-        setSpecial(false);
+        // setSpecial(false);
         setSelectedApp(selectedApp === title ? null : title);
     };
 
@@ -59,6 +59,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
         }
     };
 
+/*
     const toggleSpecial = () => {
         setSelectedApp(null);
         if (!special) {
@@ -66,6 +67,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
         }
         setSpecial(!special);
     };
+*/
 
     const stopApplication = () => {
         // if (app.requiresConfirmation) {
@@ -103,20 +105,20 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
                 ))}
             </div>
             {state.running &&
-                <div className="p-4 border-t border-black bg-orange-700 text-center flex justify-between">
-                    <div>{state.running}</div>
-                    <button onClick={() => stopApplication()}
-                            className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Stopper
-                    </button>
-                </div>}
+            <div className="p-4 border-t border-black bg-orange-700 text-center flex justify-between">
+                <div>{state.running}</div>
+                <button onClick={() => stopApplication()}
+                        className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Stopper
+                </button>
+            </div>}
             {/*
-                <div className="flex flex-col">
-                    <h3 onClick={toggleSpecial} className="cursor-pointer self-center text-xl">Stop {state.running}</h3>
-                    {special && (
-                        <>
-                        </>
-                    )}
-                </div>
+            <div className="flex flex-col">
+                <h3 onClick={toggleSpecial} className="cursor-pointer self-center text-xl">Stop {state.running}</h3>
+                {special && (
+                    <>
+                    </>
+                )}
+            </div>
             */}
             {/*
             <div className="p-4 border-t border-black bg-orange-700">

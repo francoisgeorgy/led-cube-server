@@ -1,5 +1,6 @@
 import argparse
 import json
+import logging
 import os
 import signal
 import subprocess
@@ -192,18 +193,55 @@ def enable_cors():
     response.headers['Access-Control-Allow-Origin'] = '*'
 
 
+def setup_logging(log_destination):
+    if log_destination == '--':
+        # Logging to standard output
+        logging.basicConfig(stream=sys.stdout, level=logging.INFO,
+                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    elif log_destination:
+        # Logging to the specified file
+        logging.basicConfig(filename=log_destination, level=logging.INFO,
+                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    else:
+        # Disable logging if no argument is passed
+        logging.disable(logging.CRITICAL)
+
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='LED Cube server')
 
+    # To run this script with logging enabled and output to standard output:
+    #
+    #   python server.py -v
+    #
+    # To run this script with logging enabled and output to a file (e.g., output.log):
+    #
+    #   python script.py --logfile output.log
+    #
+
     parser.add_argument('-c', '--config', type=str, default=None, help='Path to the configuration file')
     parser.add_argument('-s', '--script', type=str, default=None, help='Name of the script to run')
     parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose mode')
+    parser.add_argument("--logfile", type=str, nargs='?', const='--', default=None,
+                        help="Specify '--' to log to standard output, or provide a filename to log to that file")
     args = parser.parse_args()
+
     verbose = args.verbose
 
-    print(f"Configuration file: {args.config}")
-    print(f"Script to run: {args.script}")
+    setup_logging(args.logfile)
+
+    # Access and configure Bottle's logger to use your settings
+    bottle_logger = logging.getLogger('bottle')
+    bottle_logger.setLevel(logging.INFO)  # Set the logging level you desire for Bottle
+
+    # Example logging
+    if args.logfile:
+        logging.info("Logging to file: {}".format(args.logfile))
+
+    # TODO,FIXME : redirect Bottle logs to a file
+    logging.info(f"Configuration file: {args.config}")
+    logging.info(f"Script to run: {args.script}")
 
     # Load configuration from the file
     env = os.getenv('CUBE_ENV', 'development')
@@ -221,7 +259,7 @@ if __name__ == '__main__':
         print(f'Unable to read config file {config_file}')
         sys.exit(1)
     app.config.update(config_data)
-    print(f'configuration loaded from {config_file}')
+    logging.info(f'configuration loaded from {config_file}')
 
     if args.script is not None:
         _call_script(args.script)

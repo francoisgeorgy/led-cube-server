@@ -1,7 +1,5 @@
-import {stopApplicationScript, stopScript} from "../utils/commands.ts";
 import {Application} from "../utils/interfaces.ts";
 import {StartStopApplicationButtons} from "./StartStopApplicationButtons.tsx";
-import {APP_COLORS} from "../utils/applications.ts";
 
 interface ApplicationHeaderProps {
     application: Application;

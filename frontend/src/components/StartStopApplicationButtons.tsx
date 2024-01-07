@@ -2,12 +2,13 @@ import {StartApplicationButton} from "./StartApplicationButton.tsx";
 import {StopApplicationButton} from "./StopApplicationButton.tsx";
 import {Application} from "../utils/interfaces.ts";
 import {state} from "../State.ts";
+import {observer} from "mobx-react-lite";
 
 interface StartStopApplicationButtonsProps {
     application: Application;
 }
 
-export function StartStopApplicationButtons({application}: StartStopApplicationButtonsProps) {
+export const StartStopApplicationButtons = observer(({application}: StartStopApplicationButtonsProps) => {
 
     const stop = state.running == application.start_script;
 
@@ -18,4 +19,4 @@ export function StartStopApplicationButtons({application}: StartStopApplicationB
         </>
     );
 
-}
+});

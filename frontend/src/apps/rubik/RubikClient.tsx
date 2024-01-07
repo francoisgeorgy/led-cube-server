@@ -1,15 +1,18 @@
-import {useWebSocket} from "../../useWebSocket.ts";
 import {useState} from "react";
+import {useWebSocket} from "../../useWebSocket.ts";
 import {WsRubikAutoCommands} from "./RubikAutoCommands.tsx";
 import {WsRubikManualCommands} from "./RubikManualCommands.tsx";
 import {state} from "../../State.ts";
 import {observer} from "mobx-react-lite";
+import './rubik.css'
 
 export const RubikClient = observer(() => {
 
     const [mode, setMode] = useState<string>("auto");
     const [reconnectCounter, setReconnectCounter] = useState(0);
-    const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.cube_host}:${state.port_ws}/ws`, reconnectCounter);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.cube_host}:${state.port_ws}/ws`, reconnectCounter);
+    const {connected, message, sendMessage} = useWebSocket(`ws://${state.cube_host}:${state.port_ws}/ws`, reconnectCounter);
 
     const setModeAuto = () => {
         setMode("auto");

@@ -29,7 +29,7 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
     const reconnectionTimeout = useRef(-1);
 
     const reconnectInterval = 3000; // Time in milliseconds to wait for reconnection
-    const maxReconnectAttempts = 3; // Maximum number of reconnection attempts
+    const maxReconnectAttempts = 10;  // Maximum number of reconnection attempts
     let reconnectAttempts = 0;
 
     // The useCallback hook in the useWebSocket example is used to memoize the connect function. Memoization is a

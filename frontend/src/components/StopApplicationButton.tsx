@@ -1,4 +1,4 @@
-import {stopApplicationScript, stopScript} from "../utils/commands.ts";
+import {stopApplicationScript} from "../utils/commands.ts";
 import {Application} from "../utils/interfaces.ts";
 
 interface CommandButtonProps {
@@ -8,7 +8,7 @@ interface CommandButtonProps {
 export function StopApplicationButton({application}: CommandButtonProps) {
 
     const stopApplication = (app: Application) => {
-        if (app.stop_script) stopApplicationScript(app.stop_script);
+        if (app.stop_script) stopApplicationScript(app.category, app.stop_script);
     };
 
     return (

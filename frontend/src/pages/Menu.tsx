@@ -4,16 +4,16 @@ export function Menu() {
     return (
         <div className="flex-1 overflow-auto bg-gray-500 flex flex-col">
             <div className="p-4 border-b border-black text-center">
-                <Link to="/shaders" className="font-bold text-xl">Shaders</Link>
-            </div>
-            <div className="p-4 border-b border-black text-center">
                 <Link to="/color" className="font-bold text-xl">Couleur</Link>
             </div>
             <div className="p-4 border-b border-black text-center">
                 <Link to="/rubik" className="font-bold text-xl">Rubik's Cube</Link>
             </div>
             <div className="p-4 border-b border-black text-center">
-                <Link to="/applications" className="font-bold text-xl">Divers</Link>
+                <Link to="/snow" className="font-bold text-xl">Cube à neige</Link>
+            </div>
+            <div className="p-4 border-b border-black text-center">
+                <Link to="/shaders" className="font-bold text-xl">Shaders</Link>
             </div>
             <div className="p-4 border-b border-black text-center">
                 <Link to="/tests" className="font-bold text-xl">Tests</Link>
