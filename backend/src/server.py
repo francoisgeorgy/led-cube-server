@@ -265,6 +265,7 @@ if __name__ == '__main__':
         _call_script(args.script)
         # TODO: handle error if script not found
 
+    # host_ip = '0.0.0.0' # listen on all available public IPs of the machine.
     host_ip = get_cube_ip()
     # TODO: use a better WSGI runner (e.g. gunicorn)
     run(app=app, host=f'{host_ip}', port=5040, debug=False, reloader=False)

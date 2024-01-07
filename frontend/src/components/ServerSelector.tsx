@@ -12,6 +12,7 @@ interface ServerOption {
 export const ServerSelector = observer(() => {
 
     const serverOptions: ServerOption[] = [
+        {label: 'local', host: 'localhost', port_http: 5040, port_ws: 5041},
         {label: 'm2', host: '192.168.1.73', port_http: 5040, port_ws: 5041},
         {label: 'pi-e1-12', host: '192.168.1.100', port_http: 5040, port_ws: 5041},
         {label: 'pi-de-e0', host: '192.168.1.101', port_http: 5040, port_ws: 5041},
@@ -54,10 +55,9 @@ export const ServerSelector = observer(() => {
     }, [state.cube_host, state.port_http]);
 
     const handleServerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log("handleServerChange", e.target.value);
-        const c = serverOptions.find(o => o.label == e.target.value)
+        const c = serverOptions.find(o => o.host == e.target.value)
         if (c) {
-            console.log("handleServerChange set", c.host, c.port_http, c.port_ws);
+            // console.log("handleServerChange set", c.host, c.port_http, c.port_ws);
             state.setCubeHost(c.host);
             state.setPortHttp(c.port_http);
             state.setPortWs(c.port_ws);
