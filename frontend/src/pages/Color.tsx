@@ -1,12 +1,12 @@
-import {WsExampleClient} from "../apps/color/WsExampleClient.tsx";
+import {ColorClient} from "../apps/color/ColorClient.tsx";
 import {ApplicationHeader} from "../components/ApplicationHeader.tsx";
 import {APP_COLORS} from "../utils/applications.ts";
 
-export function WsExample() {
+export function Color() {
     return (
         <div className="p-4">
             <ApplicationHeader application={APP_COLORS} />
-            <WsExampleClient/>
+            <ColorClient/>
         </div>
     );
 }

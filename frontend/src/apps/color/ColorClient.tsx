@@ -3,9 +3,9 @@ import {useCallback, useState} from "react";
 import {RgbColor, RgbColorPicker} from "react-colorful";
 import {state} from "../../State.ts";
 import _ from 'lodash';
-import "./WsExampleClient.css";
+import "./ColorClient.css";
 
-export const WsExampleClient: React.FC = () => {
+export const ColorClient: React.FC = () => {
 
     const [color, setColor] = useState({ r: 50, g: 50, b: 150 });
     const [reconnectCounter, setReconnectCounter] = useState(0);

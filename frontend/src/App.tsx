@@ -11,7 +11,7 @@ import {Applications} from "./pages/Applications.tsx";
 import {About} from "./pages/About.tsx";
 import {Home} from "./pages/Home.tsx";
 import {NotFound} from "./pages/NotFound.tsx";
-import {WsExample} from "./pages/WsExample.tsx";
+import {Color} from "./pages/Color.tsx";
 
 export default function App() {
     return (
@@ -27,7 +27,7 @@ export default function App() {
                     <Route path="shaders" element={<Shaders/>}/>
                     <Route path="applications" element={<Applications/>}/>
                     <Route path="tests" element={<Tests/>}/>
-                    <Route path="wsexample" element={<WsExample/>}/>
+                    <Route path="wsexample" element={<Color/>}/>
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>
                 </Route>

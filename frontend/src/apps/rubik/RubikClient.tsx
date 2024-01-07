@@ -5,7 +5,7 @@ import {WsRubikManualCommands} from "./RubikManualCommands.tsx";
 import {state} from "../../State.ts";
 import {observer} from "mobx-react-lite";
 
-export const WsRubikClient = observer(() => {
+export const RubikClient = observer(() => {
 
     const [mode, setMode] = useState<string>("auto");
     const [reconnectCounter, setReconnectCounter] = useState(0);
