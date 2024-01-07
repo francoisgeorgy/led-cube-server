@@ -1,14 +1,14 @@
 import {state} from "../State.ts";
 
 export const startScript = async (category: string, script: string) => {
-    console.log("enter sendCommand");
+    // console.log("enter sendCommand");
     try {
-        console.log("send command");
+        // console.log("send command");
         const response = await fetch(
             `http://${state.cube_host}:${state.port_http}/api/start/${category}/${script}`,
             {mode: "cors"}
         );
-        console.log("command sent");
+        // console.log("command sent");
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data?.error ?? `${response.status} requête invalide`);
@@ -26,14 +26,14 @@ export const startScript = async (category: string, script: string) => {
 };
 
 export const stopApplicationScript = async (category: string, script: string) => {
-    console.log("enter stopApplicationScript");
+    // console.log("enter stopApplicationScript");
     try {
-        console.log("send command");
+        // console.log("send command");
         const response = await fetch(
             `http://${state.cube_host}:${state.port_http}/api/stop/${category}/${script}`,
             {mode: "cors"}
         );
-        console.log("command sent");
+        // console.log("command sent");
         const data = await response.json();
         if (!response.ok) {
             throw new Error(data?.error ?? `${response.status} requête invalide`);
@@ -51,9 +51,9 @@ export const stopApplicationScript = async (category: string, script: string) =>
 };
 
 export const stopScript = async () => {
-    console.log("enter sendCommand");
+    // console.log("enter sendCommand");
     try {
-        console.log("send command");
+        // console.log("send command");
         const response = await fetch(
             `http://${state.cube_host}:${state.port_http}/api/stop`,
             {mode: "cors"}

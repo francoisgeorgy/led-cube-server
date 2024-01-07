@@ -10,6 +10,7 @@ import {Color} from "./pages/Color.tsx";
 import {Menu} from "./pages/Menu.tsx";
 import {Snow} from "./pages/Snow.tsx";
 import './App.css'
+import {System} from "./pages/System.tsx";
 
 export default function App() {
     return (
@@ -26,6 +27,7 @@ export default function App() {
                     <Route path="snow" element={<Snow/>}/>
                     <Route path="applications" element={<Applications/>}/>
                     <Route path="tests" element={<Tests/>}/>
+                    <Route path="system" element={<System/>}/>
                     <Route path="color" element={<Color/>}/>
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>

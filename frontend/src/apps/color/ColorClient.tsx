@@ -1,5 +1,5 @@
 import {useWebSocket} from "../../useWebSocket.ts";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {RgbColor, RgbColorPicker} from "react-colorful";
 import {state} from "../../State.ts";
 import _ from 'lodash';
@@ -15,12 +15,16 @@ export const ColorClient = observer(() => {
 
     const updateColor = useCallback(
         _.throttle((rgb: RgbColor) => {
-          console.log('updateColor:', rgb);
+          // console.log('updateColor:', rgb);
           setColor(rgb);
           sendMessage({command: 'color', parameters: rgb});
         }, 100),
         []
     );
+
+    // useEffect(() => {
+    //     if (state.running) setReconnectCounter((prev) => prev + 1); // Increment to trigger reconnection
+    // }, [state.running]);
 
     const forceReconnect = () => {
         setReconnectCounter((prev) => prev + 1); // Increment to trigger reconnection

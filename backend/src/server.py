@@ -5,6 +5,7 @@ import os
 import signal
 import subprocess
 import sys
+import time
 
 from bottle import run, response, Bottle, error, static_file, json_dumps
 
@@ -164,6 +165,30 @@ def running():
 def ping():
     """Utility api end-point mainly for quick-testing; could be used to monitor is the server is up."""
     return {"message": "pong"}
+
+
+@app.route('/api/server/restart')
+def server_restart():
+    script_path = os.path.join(app.config['scripts_dir'], 'server', 'server_restart.sh')
+    if not os.path.isfile(script_path):
+        response.status = 400
+        return {"error": f"{script_path} does not exist"}
+    try:
+        p = subprocess.Popen(script_path, stdout=subprocess.PIPE, shell=False, preexec_fn=os.setsid)
+        return {"message": f"process {os.getpgid(p.pid)} called"}
+    except Exception as e:
+        response.status = 500
+        return {"error": str(e)}
+
+
+@app.route('/api/system/reboot')
+def system_reboot():
+    os.system('sudo reboot')
+
+
+@app.route('/api/system/poweroff')
+def server_poweroff():
+    os.system('sudo poweroff')
 
 
 @app.route('/api/applications/<category>')

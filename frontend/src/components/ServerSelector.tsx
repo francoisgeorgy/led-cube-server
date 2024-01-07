@@ -11,8 +11,11 @@ interface ServerOption {
 
 export const ServerSelector = observer(() => {
 
+    // const backendPort = 8080; // the port your backend is running on
+    // const backendBaseUrl = `${window.location.protocol}//${window.location.hostname}:${backendPort}`;
+
     const serverOptions: ServerOption[] = [
-        {label: 'local', host: 'localhost', port_http: 5040, port_ws: 5041},
+        {label: 'local', host: window.location.hostname, port_http: 5040, port_ws: 5041},
         {label: 'm2', host: '192.168.1.73', port_http: 5040, port_ws: 5041},
         {label: 'pi-e1-12', host: '192.168.1.100', port_http: 5040, port_ws: 5041},
         {label: 'pi-de-e0', host: '192.168.1.101', port_http: 5040, port_ws: 5041},
@@ -20,7 +23,7 @@ export const ServerSelector = observer(() => {
 
     const fetchRunningStatus = async () => {
         try {
-            console.log("fetchRunningStatus", state.cube_host, state.port_http);
+            // console.log("fetchRunningStatus", state.cube_host, state.port_http);
 
             const response = await fetch(
                 `http://${state.cube_host}:${state.port_http}/api/running`,
@@ -34,7 +37,7 @@ export const ServerSelector = observer(() => {
                 console.warn("unexpected response", response.status)
                 state.setRunning('');
             } else if (Object.prototype.hasOwnProperty.call(data, 'running')) {
-                console.log("running: ", data.running)
+                // console.log("running: ", data.running)
                 state.setRunning(data.running);
             } else {
                 console.warn("unexpected response", data)
