@@ -11,7 +11,7 @@ export const ColorClient = observer(() => {
     const [color, setColor] = useState({ r: 50, g: 50, b: 150 });
     const [reconnectCounter, setReconnectCounter] = useState(0);
     // const {connected, status, message, sendMessage} = useWebSocket(`ws://${state.cube_host}:${state.port_ws}/ws`, reconnectCounter);
-    const {connected, sendMessage} = useWebSocket(`ws://${state.cube_host}:${state.port_ws}/ws`, reconnectCounter);
+    const {connected, message, sendMessage} = useWebSocket(`ws://${state.cube_host}:${state.port_ws}/ws`, reconnectCounter);
 
     const updateColor = useCallback(
         _.throttle((rgb: RgbColor) => {
@@ -40,6 +40,9 @@ export const ColorClient = observer(() => {
             <div className="border-t border-blue-400 pt-2 my-4">
                 <div className="mb-4">
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}
+                </div>
+                <div>
+                    M: {message}
                 </div>
                 {!connected && <button className="self-center bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
                                        onClick={forceReconnect}>Reconnexion</button>}

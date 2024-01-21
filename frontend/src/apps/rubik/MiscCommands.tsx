@@ -13,7 +13,7 @@ export function MiscCommands({sendMessage}: WsRubikScrambleProps) {
             <Button name="Aide" onClick={() => sendMessage({command: 'hint'})} disabled={true} />
             <Button name="Auto" onClick={() => sendMessage({command: 'auto'})} />
             {/*<Button name="Cube" onClick={() => sendMessage({command: 'cube'})} />*/}
-            <Button name="Noms" onClick={() => sendMessage({command: 'help'})} />
+            <Button name="Noms" onClick={() => sendMessage({command: 'names'})} />
             <div></div>
             <Button name="Reset" onClick={() => sendMessage({command: 'reset'})} />
         </div>

@@ -80,13 +80,29 @@ def start_script(category, script):
     :return:
     """
     global running_script
+    # If a script is already running, we stop it
+    # TODO: add option to ignore request if a script is already running
     if running_script:
-        response.status = 409   # conflict
-        return {"error": f"A script is already running."}
+        # If the requested script is already running, we do nothing
+        if running_script['script'] == script:
+            return {"message": f"{script} is already running"}
+
+        # response.status = 409   # conflict
+        # return {"error": f"A script is already running."}
+        try:
+            pid = os.getpgid(running_script['process'].pid)
+            os.killpg(pid, signal.SIGTERM)  # Send the signal to all the process groups
+            s = running_script['script']
+            running_script = None
+            # return {"message": f"script {s} stopped"}
+        except Exception as e:
+            response.status = 500
+            return {"error": str(e)}
+
     script_path = os.path.join(app.config['scripts_dir'], category, script)
     if not os.path.isfile(script_path):
         response.status = 400
-        return {"error": f"{script_path} does not exist"}
+        return {"error": f"{script} not found"}
     try:
         # subprocess.Popen is non-blocking
         # The os.setsid() is passed in the argument preexec_fn so
@@ -96,7 +112,7 @@ def start_script(category, script):
             'script': script,
             'process': p
         }
-        return {"message": f"process {os.getpgid(p.pid)} started"}
+        return {"message": f"{script} started"}
     except Exception as e:
         response.status = 500
         return {"error": str(e)}
@@ -290,7 +306,7 @@ if __name__ == '__main__':
         _call_script(args.script)
         # TODO: handle error if script not found
 
-    # host_ip = '0.0.0.0' # listen on all available public IPs of the machine.
-    host_ip = get_cube_ip()
+    host_ip = '0.0.0.0' # listen on all available public IPs of the machine.
+    # host_ip = get_cube_ip()
     # TODO: use a better WSGI runner (e.g. gunicorn)
     run(app=app, host=f'{host_ip}', port=5040, debug=False, reloader=False)

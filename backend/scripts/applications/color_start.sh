@@ -1,8 +1,8 @@
 #!/bin/bash
 
-cd /home/cube/emulator || exit
+cd /home/cube/python || exit
 
-source /home/cube/emulator/.venv/bin/activate
+# source /home/cube/python/.venv/bin/activate
 
 # TODO: remove arguments which are default values
 sudo -E env PATH=$PATH python src/samples/websockets_color.py \
@@ -12,5 +12,5 @@ sudo -E env PATH=$PATH python src/samples/websockets_color.py \
     --led-brightness 30 \
     --led-pixel-mapper=Cube &
 
-#echo $! | sudo tee /home/cube/emulator/websockets_color.pid
-#echo "PID is $(cat /home/cube/emulator/websockets_color.pid)"
+#echo $! | sudo tee /home/cube/python/websockets_color.pid
+#echo "PID is $(cat /home/cube/python/websockets_color.pid)"

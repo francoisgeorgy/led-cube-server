@@ -8,7 +8,7 @@ if [ -n "$app_pid" ]; then
     echo "${APP} PID is $app_pid"
     # TODO: find a better way to stop the server
     sudo kill -9 $app_pid
-    echo "process $app_pid killed"
+#    echo "process $app_pid killed"
 else
     echo "Aucun process ${APP} trouvé."
     exit 1
