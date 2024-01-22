@@ -3,18 +3,19 @@ import {state} from "../State.ts";
 import {observer} from "mobx-react-lite";
 import {startScript, stopScript} from "../utils/commands.ts";
 import {Application} from "../utils/interfaces.ts";
+import {ApplicationButton} from "./ApplicationButton.tsx";
 
-interface AppDescriptionProps {
-    description: string;
-    className?: string;
-}
+// interface AppDescriptionProps {
+//     description: string;
+//     className?: string;
+// }
 
-function AppDescription({description, className}: AppDescriptionProps) {
-    const lines = description.split('\n').map((line, index) => (
-        <span key={index}>{line}<br/></span>
-    ));
-    return <div className={className}>{lines}</div>;
-}
+// function AppDescription({description, className}: AppDescriptionProps) {
+//     const lines = description.split('\n').map((line, index) => (
+//         <span key={index}>{line}<br/></span>
+//     ));
+//     return <div className={className}>{lines}</div>;
+// }
 
 interface ApplicationsListProps {
     category: string;
@@ -23,7 +24,7 @@ interface ApplicationsListProps {
 
 export const ApplicationsList = observer(({category, formatNameFunc}: ApplicationsListProps) => {
 
-    const [selectedApp, setSelectedApp] = useState<string | null>(null);
+    // const [selectedApp, setSelectedApp] = useState<string | null>(null);
 
     const [applications, setApplications] = useState<Application[]>([]);
 
@@ -37,12 +38,13 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
             .catch(error => console.error('Error fetching data: ', error));
     }, [state.cube_host, state.port_http]);
 
-    const handleClick = (title: string) => {
-        // setSpecial(false);
-        setSelectedApp(selectedApp === title ? null : title);
-    };
+    // const handleClick = (title: string) => {
+    //     // setSpecial(false);
+    //     setSelectedApp(selectedApp === title ? null : title);
+    // };
 
     const startApplication = async (app: Application) => {
+        console.log("startApplication", app);
         if (app.requiresConfirmation) {
             if (window.confirm(`Launch ${app.title}?`)) {
                 console.log(`Launching ${app.title}`);
@@ -53,9 +55,9 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
             // Launch the application
             const b = await startScript(category, app.start_script);
             // console.log('startScript result:', b);
-            if (b) {
-                setSelectedApp(null);
-            }
+            // if (b) {
+            //     setSelectedApp(null);
+            // }
         }
     };
 
@@ -90,6 +92,8 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
         <>
             <div className="flex-1 Xp-4 overflow-auto bg-gray-500">
                 {applications.map(app => (
+                    <ApplicationButton application={app} />
+/*
                     <div key={app.start_script} className="p-4 border-b border-black flex flex-col">
                         <h3 onClick={() => handleClick(app.start_script)}
                             className="cursor-pointer self-center font-bold text-xl">{displayFormattedName(app.title)}</h3>
@@ -102,6 +106,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
                             </>
                         )}
                     </div>
+*/
                 ))}
             </div>
             {state.running &&

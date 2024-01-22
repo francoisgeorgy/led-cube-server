@@ -100,7 +100,7 @@ const VectorDisplay: React.FC<VectorDisplayProps> = ({ message }) => {
         }
     }, [message]);
 
-    return <div ref={mountRef} style={{ width: '400px', height: '400px' }} />;
+    return <div ref={mountRef} style={{ width: '100%', height: '400px' }} />;
 };
 
 export default VectorDisplay;

@@ -9,9 +9,9 @@ import {NotFound} from "./pages/NotFound.tsx";
 import {Color} from "./pages/Color.tsx";
 import {Menu} from "./pages/Menu.tsx";
 import {Snow} from "./pages/Snow.tsx";
-import './App.css'
 import {System} from "./pages/System.tsx";
-import {Cube3D} from "./pages/Cube3D.tsx";
+import {IMU} from "./pages/Imu.tsx";
+import './App.css'
 
 export default function App() {
     return (
@@ -29,7 +29,7 @@ export default function App() {
                     <Route path="applications" element={<Applications/>}/>
                     <Route path="tests" element={<Tests/>}/>
                     <Route path="system" element={<System/>}/>
-                    <Route path="3d" element={<Cube3D/>}/>
+                    <Route path="imu" element={<IMU/>}/>
                     <Route path="color" element={<Color/>}/>
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>

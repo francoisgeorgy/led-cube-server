@@ -26,3 +26,41 @@ export const APP_SNOW_CUBE: Application = {
     description: 'Cube à neige',
     requiresConfirmation: false
 }
+
+export const APP_IMU: Application = {
+    category: 'applications',
+    start_script: '3d_start.sh',
+    stop_script: '3d_stop.sh',
+    title: "3D",
+    requiresConfirmation: false
+}
+
+export const APP_HEALTH: Application = {
+    category: 'applications',
+    start_script: 'TODO.sh',
+    stop_script: 'TODO.sh',
+    title: "Health",
+    requiresConfirmation: false
+}
+
+export const APP_RESTART_WEB: Application = {
+    category: 'applications',
+    start_script: 'TODO.sh',
+    stop_script: 'TODO.sh',
+    title: 'Redémarrer le serveur web',
+    requiresConfirmation: false,
+    code: "424242",
+    button_color: 'red',
+    button_text: 'Redémarrer le serveur web'
+}
+
+export const APP_REBOOT: Application = {
+    category: 'applications',
+    start_script: 'TODO.sh',
+    stop_script: 'TODO.sh',
+    title: 'Redémarrer tout le Cube',
+    requiresConfirmation: false,
+    code: "424242",
+    button_color: 'red',
+    button_text: 'Redémarrer tout le Cube'
+}

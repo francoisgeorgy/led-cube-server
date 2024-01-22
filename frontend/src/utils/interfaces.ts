@@ -6,4 +6,7 @@ export interface Application {
     title: string;
     description: string;
     requiresConfirmation: boolean;
+    code?: string;
+    button_color?: string;
+    button_text?: string;
 }
