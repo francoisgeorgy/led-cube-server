@@ -1,6 +1,3 @@
-import {ApplicationsList} from "../components/ApplicationsList.tsx";
-import {Link} from "react-router-dom";
-
 export function System() {
     return (
         <div className="flex-1 overflow-auto bg-gray-500 flex flex-col">

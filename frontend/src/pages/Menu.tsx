@@ -21,6 +21,9 @@ export function Menu() {
             <div className="p-4 border-b border-black text-center">
                 <Link to="/system" className="font-bold text-xl">System</Link>
             </div>
+            <div className="p-4 border-b border-black text-center">
+                <Link to="/3d" className="font-bold text-xl">3D</Link>
+            </div>
             <div className="flex-1"></div>
             <div className="p-4 border-b border-black text-center bg-gray-700 text-gray-300">
                 Cliquez sur <span className="border rounded px-1 py-1 text-sm leading-8 mx-1">LED Cube</span> pour revenir<br />
