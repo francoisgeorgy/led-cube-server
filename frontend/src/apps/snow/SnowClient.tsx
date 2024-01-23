@@ -34,7 +34,7 @@ export const SnowClient = observer(() => {
             </div>
             {state.running &&
             <div className="p-4 border-t border-black bg-orange-700 text-center flex justify-between">
-                <div>{state.running}</div>
+                <div>{state.running?.category} {state.running?.script}</div>
                 <button onClick={stopApplication}
                         className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Stopper
                 </button>

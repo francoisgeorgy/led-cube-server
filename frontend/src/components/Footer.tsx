@@ -3,7 +3,8 @@ import {state} from "../State.ts";
 
 export const Footer = observer(() => {
 
-    return (
-        <div>Actif: {state.running}</div>
-    )
+    return null;
+    // return (
+    //     <div>Actif: {state.running}</div>
+    // )
 });

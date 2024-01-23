@@ -84,8 +84,8 @@ def start_script(category, script):
     # TODO: add option to ignore request if a script is already running
     if running_script:
         # If the requested script is already running, we do nothing
-        if running_script['script'] == script:
-            return {"message": f"{script} is already running"}
+        if running_script['category'] == category and running_script['script'] == script:
+            return {"message": f"{category}/{script} is already running"}
 
         # response.status = 409   # conflict
         # return {"error": f"A script is already running."}
@@ -102,17 +102,18 @@ def start_script(category, script):
     script_path = os.path.join(app.config['scripts_dir'], category, script)
     if not os.path.isfile(script_path):
         response.status = 400
-        return {"error": f"{script} not found"}
+        return {"error": f"{category}/{script} not found"}
     try:
         # subprocess.Popen is non-blocking
         # The os.setsid() is passed in the argument preexec_fn so
         # it's run after the fork() and before exec() to run the shell.
         p = subprocess.Popen(script_path, stdout=subprocess.PIPE, shell=False, preexec_fn=os.setsid)
         running_script = {
+            'category': category,
             'script': script,
             'process': p
         }
-        return {"message": f"{script} started"}
+        return {"message": f"{category}/{script} started"}
     except Exception as e:
         response.status = 500
         return {"error": str(e)}
@@ -131,7 +132,7 @@ def stop_script(category, script):
     script_path = os.path.join(app.config['scripts_dir'], category, script)
     if not os.path.isfile(script_path):
         response.status = 400
-        return {"error": f"{script_path} does not exist"}
+        return {"error": f"{category}/{script} does not exist"}
     try:
         # subprocess.Popen is non-blocking
         # The os.setsid() is passed in the argument preexec_fn so
@@ -157,9 +158,10 @@ def stop_current_script():
     try:
         pid = os.getpgid(running_script['process'].pid)
         os.killpg(pid, signal.SIGTERM)  # Send the signal to all the process groups
+        c = running_script['category']
         s = running_script['script']
         running_script = None
-        return {"message": f"script {s} stopped"}
+        return {"message": f"script {c}/{s} stopped"}
     except Exception as e:
         response.status = 500
         return {"error": str(e)}
@@ -172,9 +174,12 @@ def running():
     :return: the list of running scripts
     """
     if running_script is not None:
-        return {"running": running_script['script']}
+        return {"running": {
+            'category': running_script['category'],
+            'script': running_script['script']
+        }}
     else:
-        return {"running": ""}
+        return {"running": None}
 
 
 @app.route('/api/ping')

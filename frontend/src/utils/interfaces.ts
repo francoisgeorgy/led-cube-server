@@ -10,3 +10,8 @@ export interface Application {
     button_color?: string;
     button_text?: string;
 }
+
+export interface Running {
+    category: string;
+    script: string;
+}

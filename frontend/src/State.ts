@@ -1,5 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {loadPreferences, savePreferences} from "./preferences";
+import {Running} from "./utils/interfaces.ts";
 
 class State {
 
@@ -9,7 +10,7 @@ class State {
     port_ws: number;
     alive: boolean;
     status: string;
-    running: string;
+    running: null|Running;
 
     constructor() {
         const prefs = loadPreferences();
@@ -18,7 +19,7 @@ class State {
         this.port_ws = prefs.port_ws;
         this.alive = false;
         this.status = '';
-        this.running = '';
+        this.running = null;
         makeAutoObservable(this);
     }
 
@@ -45,7 +46,7 @@ class State {
         this.status = status;
     }
 
-    setRunning(script: string) {
+    setRunning(script: any) {
         this.running = script;
     }
 

@@ -26,6 +26,7 @@ def get_applications(directory, category=''):
                     stop_script = None
 
                 applications.append({
+                    "category": category,
                     "start_script": file,
                     "title": app_name,
                     "requiresConfirmation": False,       # TODO: define requiresConfirmation
