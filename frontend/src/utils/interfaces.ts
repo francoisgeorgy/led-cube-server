@@ -1,8 +1,9 @@
 
 export interface Application {
     category: string;
-    start_script: string;     // will be used as key
-    stop_script?: string;
+    application: string;
+    // start_script: string;     // will be used as key
+    // stop_script?: string;
     title: string;
     description: string;
     requiresConfirmation: boolean;
@@ -13,5 +14,5 @@ export interface Application {
 
 export interface Running {
     category: string;
-    script: string;
+    application: string;
 }

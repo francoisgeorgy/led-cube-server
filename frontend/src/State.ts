@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import {loadPreferences, savePreferences} from "./preferences";
-import {Running} from "./utils/interfaces.ts";
+import {Application, Running} from "./utils/interfaces.ts";
 
 class State {
 
@@ -46,8 +46,12 @@ class State {
         this.status = status;
     }
 
-    setRunning(script: any) {
-        this.running = script;
+    setRunning(running: any) {
+        this.running = running;
+    }
+
+    isRunning(application: Application) {
+        return this.running && this.running.category == application.category && this.running.application == application.application;
     }
 
 }

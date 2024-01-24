@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {state} from "../State.ts";
 import {observer} from "mobx-react-lite";
-import {startScript, stopScript} from "../utils/commands.ts";
 import {Application} from "../utils/interfaces.ts";
 import {ApplicationButton} from "./ApplicationButton.tsx";
 
@@ -43,6 +42,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
     //     setSelectedApp(selectedApp === title ? null : title);
     // };
 
+/*
     const startApplication = async (app: Application) => {
         console.log("startApplication", app);
         if (app.requiresConfirmation) {
@@ -53,13 +53,14 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
         } else {
             console.log(`Launching ${app.title}`);
             // Launch the application
-            const b = await startScript(category, app.start_script);
+            const b = await startScript(category, app.application);
             // console.log('startScript result:', b);
             // if (b) {
             //     setSelectedApp(null);
             // }
         }
     };
+*/
 
 /*
     const toggleSpecial = () => {
@@ -71,6 +72,7 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
     };
 */
 
+/*
     const stopApplication = () => {
         // if (app.requiresConfirmation) {
         //     if (window.confirm(`Launch ${app.title}?`)) {
@@ -83,21 +85,24 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
         stopScript();
         // }
     };
+*/
 
+/*
     const displayFormattedName = (name: string) => {
         return formatNameFunc ? formatNameFunc(name) : name;
     };
+*/
 
     return (
         <>
             <div className="flex-1 Xp-4 overflow-auto bg-gray-500">
                 {applications.map(app => (
-                    <ApplicationButton application={app} />
+                    <ApplicationButton application={app} formatNameFunc={formatNameFunc} />
 /*
-                    <div key={app.start_script} className="p-4 border-b border-black flex flex-col">
-                        <h3 onClick={() => handleClick(app.start_script)}
+                    <div key={app.application} className="p-4 border-b border-black flex flex-col">
+                        <h3 onClick={() => handleClick(app.application)}
                             className="cursor-pointer self-center font-bold text-xl">{displayFormattedName(app.title)}</h3>
-                        {selectedApp === app.start_script && (
+                        {selectedApp === app.application && (
                             <>
                                 {app.description && <AppDescription description={app.description} className="p-4"/>}
                                 <button onClick={() => startApplication(app)}
@@ -109,13 +114,17 @@ export const ApplicationsList = observer(({category, formatNameFunc}: Applicatio
 */
                 ))}
             </div>
+
+{/*
             {state.running &&
             <div className="p-4 border-t border-black bg-orange-700 text-center flex justify-between">
-                <div>{state.running?.category} {state.running?.script}</div>
+                <div>{state.running?.category} {state.running?.application}</div>
                 <button onClick={() => stopApplication()}
                         className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Stopper
                 </button>
             </div>}
+*/}
+
             {/*
             <div className="flex flex-col">
                 <h3 onClick={toggleSpecial} className="cursor-pointer self-center text-xl">Stop {state.running}</h3>

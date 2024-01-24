@@ -5,6 +5,7 @@ import {WsRubikManualCommands} from "./RubikManualCommands.tsx";
 import {state} from "../../State.ts";
 import {observer} from "mobx-react-lite";
 import './rubik.css'
+import {APP_RUBIK} from "../../utils/applications.ts";
 
 export const RubikClient = observer(() => {
 
@@ -48,6 +49,8 @@ export const RubikClient = observer(() => {
                 <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"
                                        onClick={setModeDemo}>Passer en mode démo</button>}
             </div>
+
+            {state.isRunning(APP_RUBIK) && <>
             <div className="border-t border-blue-400 pt-2 my-4">
                 <div className="mb-4">
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}
@@ -63,6 +66,7 @@ export const RubikClient = observer(() => {
                     {message}
                 </div>
             </div>
+            </>}
         </div>
     );
 });

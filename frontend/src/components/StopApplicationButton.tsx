@@ -1,4 +1,4 @@
-import {stopApplicationScript} from "../utils/commands.ts";
+import {stopApplication} from "../utils/commands.ts";
 import {Application} from "../utils/interfaces.ts";
 
 interface CommandButtonProps {
@@ -7,12 +7,12 @@ interface CommandButtonProps {
 
 export function StopApplicationButton({application}: CommandButtonProps) {
 
-    const stopApplication = (app: Application) => {
-        if (app.stop_script) stopApplicationScript(app.category, app.stop_script);
+    const stopApp = (app: Application) => {
+        stopApplication(app.category, app.application);
     };
 
     return (
-        <button onClick={() => stopApplication(application)}
-            className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Stopper</button>
+        <button onClick={() => stopApp(application)}
+            className="self-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Stopper</button>
     )
 }

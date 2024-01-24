@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {observer} from "mobx-react-lite";
 import {Application} from "../utils/interfaces.ts";
-import {startScript} from "../utils/commands.ts";
+import {startApplication} from "../utils/commands.ts";
 import {state} from "../State.ts";
 
 interface AppDescriptionProps {
@@ -30,27 +30,28 @@ export const ApplicationButton = observer(({application, formatNameFunc}: Applic
         setSelected(!selected);
     };
 
-    const startApplication = async (app: Application) => {
+    const startApp = async (app: Application) => {
         console.log("startApplication", app);
         if (app.requiresConfirmation) {
+            // TODO: implement confirmation dialog
             if (window.confirm(`Launch ${app.title}?`)) {
                 console.log(`Launching ${app.title}`);
                 // Launch the application
             }
-        } if (app.code) {
+        }
+        if (app.code) {
             const c = window.prompt("Code?");
             if (c !== app.code) {
                 console.log("invalid code");
                 return false;
             }
-        } else {
-            console.log(`Launching ${app.title}`);
-            // Launch the application
-            const b = await startScript(app.category, app.start_script);
-            // console.log('startScript result:', b);
-            if (b) {
-                setSelected(false);
-            }
+        }
+        console.log(`Launching ${app.title}`);
+        // Launch the application
+        const b = await startApplication(app.category, app.application);
+        // console.log('startScript result:', b);
+        if (b) {
+            setSelected(false);
         }
     };
 
@@ -60,20 +61,18 @@ export const ApplicationButton = observer(({application, formatNameFunc}: Applic
 
     const button_class = `self-center bg-${application.button_color??'blue'}-500 hover:bg-${application.button_color??'blue'}-700 text-white font-bold py-2 px-4 rounded mt-4`;
 
-    const running = state.running?.script == application.start_script && state.running?.category == application.category;
-
     return (
         <div className={`p-4 border-b border-black flex flex-col`}>
-            <div className="w-full relative">
-                {running && <div className="float-right" title="Application active">☀</div>}
-                <h3 onClick={() => toggle()} className={` cursor-pointer self-center w-full text-center font-bold text-xl`}>
+            <div className="w-full flex justify-center items-center relative">
+                <h3 onClick={() => toggle()} className={` cursor-pointer Xself-center Xw-full text-center font-bold text-xl`}>
                     {displayFormattedName(application.title)}
                 </h3>
+                {state.isRunning(application) && <div className="absolute right-0 text-yellow-300 text-3xl" title="Application active">☀</div>}
             </div>
             {selected && (
                 <>
                     {application.description && <AppDescription description={application.description} className="p-4"/>}
-                    <button onClick={() => startApplication(application)} className={button_class}>
+                    <button onClick={() => startApp(application)} className={button_class}>
                         {application.button_text??"Démarrer l'application"}
                     </button>
                 </>

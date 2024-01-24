@@ -42,6 +42,7 @@ const VectorDisplay: React.FC<VectorDisplayProps> = ({ message }) => {
         const points = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 0)];
         const geometry = new THREE.BufferGeometry().setFromPoints(points);
         const line = new THREE.Line(geometry, material);
+        // @ts-ignore
         lineRef.current = line;
         scene.add(line);
 

@@ -1,11 +1,11 @@
 import {state} from "../State.ts";
 
-export const startScript = async (category: string, script: string) => {
+export const startApplication = async (category: string, application: string) => {
     // console.log("enter sendCommand");
     try {
         // console.log("send command");
         const response = await fetch(
-            `http://${state.cube_host}:${state.port_http}/api/start/${category}/${script}`,
+            `http://${state.cube_host}:${state.port_http}/api/start/${category}/${application}`,
             {mode: "cors"}
         );
         // console.log("command sent");
@@ -25,12 +25,16 @@ export const startScript = async (category: string, script: string) => {
     // console.log("return from sendCommand");
 };
 
-export const stopApplicationScript = async (category: string, script: string) => {
+export const stopApplication = async (category: string | undefined, application: string | undefined) => {
     // console.log("enter stopApplicationScript");
+    if (!category || !application) {
+        console.warn("stopApplication: invalid arguments", category, application)
+        return false;
+    }
     try {
         // console.log("send command");
         const response = await fetch(
-            `http://${state.cube_host}:${state.port_http}/api/stop/${category}/${script}`,
+            `http://${state.cube_host}:${state.port_http}/api/stop/${category}/${application}`,
             {mode: "cors"}
         );
         // console.log("command sent");
@@ -50,6 +54,7 @@ export const stopApplicationScript = async (category: string, script: string) =>
     // console.log("return from stopApplicationScript");
 };
 
+/*
 export const stopScript = async () => {
     // console.log("enter sendCommand");
     try {
@@ -78,6 +83,7 @@ export const stopScript = async () => {
     // console.log("return from sendCommand");
     return true;
 };
+*/
 
 /*
 export const running = async () => {

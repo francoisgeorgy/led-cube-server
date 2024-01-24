@@ -10,7 +10,7 @@ interface StartStopApplicationButtonsProps {
 
 export const StartStopApplicationButtons = observer(({application}: StartStopApplicationButtonsProps) => {
 
-    const stop = state.running?.script == application.start_script && state.running?.category == application.category;
+    const stop = state.isRunning(application);
 
     return (
         <>

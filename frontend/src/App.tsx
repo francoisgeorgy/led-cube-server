@@ -22,7 +22,6 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Menu/>}/>
-                    {/*<Route path="menu" element={<Menu/>}/>*/}
                     <Route path="rubik" element={<Rubik/>}/>
                     <Route path="shaders" element={<Shaders/>}/>
                     <Route path="snow" element={<Snow/>}/>
@@ -41,26 +40,7 @@ export default function App() {
 
 function Layout() {
     return (
-        <div className="pt-14 pb-14 flex flex-col overflow-auto h-full">
-{/*
-            <div className="bg-gray-600 py-4 flex">
-                <div className="ml-4 mr-2">
-                    <Link to="/shaders">Shaders</Link>
-                </div>
-                <div className="mx-2">
-                    <Link to="/rubik">Rubik</Link>
-                </div>
-                <div className="mx-2">
-                    <Link to="/applications">Apps</Link>
-                </div>
-                <div className="mx-2">
-                    <Link to="/tests">Tests</Link>
-                </div>
-                <div className="mx-2">
-                    <Link to="/wsexample">WS</Link>
-                </div>
-            </div>
-*/}
+        <div className="pt-14 pb-20 flex flex-col overflow-auto h-full">
             {/* An <Outlet> renders whatever child route is currently active. */}
             <Outlet/>
             <div className="bg-gray-800 text-white p-4 fixed bottom-0 left-0 right-0">

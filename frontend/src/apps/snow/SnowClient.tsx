@@ -1,22 +1,22 @@
 import {state} from "../../State.ts";
-import {startScript, stopScript} from "../../utils/commands.ts";
 import {useState} from "react";
 import {observer} from "mobx-react-lite";
 import {APP_SNOW_CUBE} from "../../utils/applications.ts";
+import {startApplication, stopApplication} from "../../utils/commands.ts";
 
 export const SnowClient = observer(() => {
 
     const [started, setStarted] = useState<boolean>(false);
 
-    const startApplication = async () => {
-        const b = await startScript(APP_SNOW_CUBE.category, APP_SNOW_CUBE.start_script);
+    const startApp = async () => {
+        const b = await startApplication(APP_SNOW_CUBE.category, APP_SNOW_CUBE.application);
         if (b) {
             setStarted(true);
         }
     };
 
-    const stopApplication = async () => {
-        const b = await stopScript();
+    const stopApp = async () => {
+        const b = await stopApplication(APP_SNOW_CUBE.category, APP_SNOW_CUBE.application);
         if (b) {
             setStarted(false);
         }
@@ -27,15 +27,15 @@ export const SnowClient = observer(() => {
                 <div className="p-4 border-b border-black flex flex-col">
                     <h3 className="cursor-pointer self-center font-bold text-xl">Cube à neige</h3>
                     {!started &&
-                    <button onClick={startApplication}
+                    <button onClick={startApp}
                             className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Démarrer
                     </button>}
                 </div>
             </div>
             {state.running &&
             <div className="p-4 border-t border-black bg-orange-700 text-center flex justify-between">
-                <div>{state.running?.category} {state.running?.script}</div>
-                <button onClick={stopApplication}
+                <div>{state.running?.application} {state.running?.application}</div>
+                <button onClick={stopApp}
                         className="self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Stopper
                 </button>
             </div>}

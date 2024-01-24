@@ -1,10 +1,11 @@
 import {useWebSocket} from "../../useWebSocket.ts";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {RgbColor, RgbColorPicker} from "react-colorful";
 import {state} from "../../State.ts";
+import {observer} from "mobx-react-lite";
+import {APP_COLORS} from "../../utils/applications.ts";
 import _ from 'lodash';
 import "./ColorClient.css";
-import {observer} from "mobx-react-lite";
 
 export const ColorClient = observer(() => {
 
@@ -37,16 +38,18 @@ export const ColorClient = observer(() => {
                 <RgbColorPicker color={color} onChange={updateColor} />
             </div>
 
+            {state.isRunning(APP_COLORS) && <>
             <div className="border-t border-blue-400 pt-2 my-4">
                 <div className="mb-4">
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}
                 </div>
                 <div>
-                    M: {message}
+                    {message}
                 </div>
                 {!connected && <button className="self-center bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
                                        onClick={forceReconnect}>Reconnexion</button>}
             </div>
+            </>}
 {/*
             <div className="mt-4">
                 <div className="mb-4">
