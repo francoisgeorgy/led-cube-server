@@ -38,28 +38,20 @@ export const ColorClient = observer(() => {
                 <RgbColorPicker color={color} onChange={updateColor} />
             </div>
 
-            {state.isRunning(APP_COLORS) && <>
-            <div className="border-t border-blue-400 pt-2 my-4">
+            {state.isRunning(APP_COLORS) &&
+            <div className="border-t border-blue-400 pt-2 mt-2">
                 <div className="mb-4">
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}
                 </div>
-                <div>
-                    {message}
-                </div>
                 {!connected && <button className="self-center bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
                                        onClick={forceReconnect}>Reconnexion</button>}
-            </div>
-            </>}
-{/*
-            <div className="mt-4">
                 <div className="mb-4">
                     Messages:
                 </div>
                 <div>
                     {message}
                 </div>
-            </div>
-*/}
+            </div>}
         </div>
     );
 

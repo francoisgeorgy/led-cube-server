@@ -4,6 +4,7 @@ import {useWebSocket} from "../../useWebSocket.ts";
 import {state} from "../../State.ts";
 import "./ImuClient.css";
 import VectorDisplay from "../../components/VectorDisplay.tsx";
+import AccelerometerVisualization from "../../components/AccelerometerVisualization.tsx";
 
 export const ImuClient = observer(() => {
 
@@ -22,11 +23,23 @@ export const ImuClient = observer(() => {
         "c": 1.0
     }
 
+    let vectorData;
+    if (message) {
+        vectorData = JSON.parse(message);
+    } else {
+        vectorData = {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.0
+        }
+    }
+
     return (
         <div className="flex flex-col h-full">
 
             <div className="responsive py-4">
-                <VectorDisplay message={JSON.stringify(v)}/>
+                {/*<VectorDisplay message={message}/>*/}
+                <AccelerometerVisualization vec={vectorData} />
             </div>
 
             <div className="border-t border-blue-400 pt-2 my-4">
@@ -34,7 +47,10 @@ export const ImuClient = observer(() => {
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}
                 </div>
                 <div>
-                    M: {message}
+                    données reçues:
+                </div>
+                <div>
+                    {message}
                 </div>
                 {!connected && <button className="self-center bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
                                        onClick={forceReconnect}>Reconnexion</button>}

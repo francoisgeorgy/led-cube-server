@@ -10,6 +10,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@react-three/fiber": "^8.15.15",
         "install": "^0.13.0",
         "lodash": "^4.17.21",
         "mobx": "^6.12.0",

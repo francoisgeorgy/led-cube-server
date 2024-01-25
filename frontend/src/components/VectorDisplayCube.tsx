@@ -5,7 +5,7 @@ interface VectorDisplayProps {
     message: string; // Assuming message is a JSON string
 }
 
-const VectorDisplay: React.FC<VectorDisplayProps> = ({ message }) => {
+const VectorDisplayCube: React.FC<VectorDisplayProps> = ({ message }) => {
     const mountRef = useRef<HTMLDivElement>(null);
     const lineRef = useRef<THREE.Line>(null);
 
@@ -51,21 +51,21 @@ const VectorDisplay: React.FC<VectorDisplayProps> = ({ message }) => {
         // const arrow = new THREE.ArrowHelper(vector, new THREE.Vector3(0, 0, 0), 1, 0xff0000);
         // scene.add(arrow);
 
-        // const geometry2 = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
-        // const material2 = new THREE.MeshBasicMaterial( { color: 0x556677 } );
-        // const mesh = new THREE.Mesh( geometry2, material2 );
-        //
-        // mesh.rotation.x = Math.PI / 3;
-        // mesh.rotation.y = Math.PI / 5;
-        // // mesh.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2));
-        // // scene.add( mesh );
-        //
-        // const geometry3 = new THREE.EdgesGeometry( mesh.geometry );
-        // const material3 = new THREE.LineBasicMaterial( { color: 0xffffff } );
-        // const wireframe = new THREE.LineSegments( geometry3, material3 );
-        // wireframe.rotation.x = Math.PI / 3;
-        // wireframe.rotation.y = Math.PI / 5;
-        // scene.add( wireframe );
+        const geometry2 = new THREE.BoxGeometry( 0.5, 0.5, 0.5 );
+        const material2 = new THREE.MeshBasicMaterial( { color: 0x556677 } );
+        const mesh = new THREE.Mesh( geometry2, material2 );
+
+        mesh.rotation.x = Math.PI / 3;
+        mesh.rotation.y = Math.PI / 5;
+        // mesh.rotation.set(new THREE.Vector3( 0, 0, Math.PI / 2));
+        // scene.add( mesh );
+
+        const geometry3 = new THREE.EdgesGeometry( mesh.geometry );
+        const material3 = new THREE.LineBasicMaterial( { color: 0xffffff } );
+        const wireframe = new THREE.LineSegments( geometry3, material3 );
+        wireframe.rotation.x = Math.PI / 3;
+        wireframe.rotation.y = Math.PI / 5;
+        scene.add( wireframe );
 
 
 
@@ -104,7 +104,7 @@ const VectorDisplay: React.FC<VectorDisplayProps> = ({ message }) => {
     return <div ref={mountRef} style={{ width: '100%', height: '400px' }} />;
 };
 
-export default VectorDisplay;
+export default VectorDisplayCube;
 
 /*
 Notes:

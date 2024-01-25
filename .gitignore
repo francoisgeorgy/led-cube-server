@@ -4,6 +4,6 @@ tmp/
 /.venv/
 /venv/
 /backend/.venv/
-/*.sh
+/push*.sh
 /backend/*.sh
-/frontend/*.sh
+/frontend/push*.sh

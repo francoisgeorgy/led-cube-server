@@ -40,33 +40,30 @@ export const RubikClient = observer(() => {
 
             <div className="my-4 text-center">
                 {mode == "auto" &&
-                <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"
-                                       onClick={setModeInter}>Passer en mode manuel</button>}
+                <button className="self-center bg-gray-700 hover:bg-gray-800 text-blue-300 px-4 p-2 rounded"
+                        onClick={setModeInter}>Passer en mode manuel</button>}
                 {mode == "manual" &&
-                <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"
-                                       onClick={setModeAuto}>Passer en mode automatique</button>}
+                <button className="self-center bg-gray-700 hover:bg-gray-800 text-blue-300 px-4 p-2 rounded"
+                        onClick={setModeAuto}>Passer en mode automatique</button>}
                 {mode == "demo" &&
-                <button className="self-center bg-gray-700 hover:bg-gray-800 text-gray-400 px-4 p-2 rounded"
-                                       onClick={setModeDemo}>Passer en mode démo</button>}
+                <button className="self-center bg-gray-700 hover:bg-gray-800 text-blue-300 px-4 p-2 rounded"
+                        onClick={setModeDemo}>Passer en mode démo</button>}
             </div>
 
-            {state.isRunning(APP_RUBIK) && <>
-            <div className="border-t border-blue-400 pt-2 my-4">
+            {state.isRunning(APP_RUBIK) &&
+            <div className="border-t border-blue-400 pt-2 mt-2">
                 <div className="mb-4">
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}
                 </div>
                 {!connected && <button className="self-center bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
                                        onClick={forceReconnect}>Reconnexion</button>}
-            </div>
-            <div className="mt-4">
                 <div className="mb-4">
                     Messages:
                 </div>
                 <div>
                     {message}
                 </div>
-            </div>
-            </>}
+            </div>}
         </div>
     );
 });

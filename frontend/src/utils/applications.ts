@@ -29,10 +29,10 @@ export const APP_SNOW_CUBE: Application = {
 }
 
 export const APP_IMU: Application = {
-    category: 'applications',
-    application: '3d',
-    // stop_script: '3d_stop.sh',
-    title: "3D",
+    category: 'tests',
+    application: 'imu',
+    // stop_script: 'imu_stop.sh',
+    title: "IMU",
     description: "",
     requiresConfirmation: false
 }
