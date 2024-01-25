@@ -31,3 +31,10 @@ To stop do :
 with : 
 
     kill -3 -$(pgrep -f 'scripts/rgb.glsl' | head -1)
+
+
+Check the processes with htop :
+-------------------------------
+
+    htop -t -s PID -F 'server.py|shaders|python|snow' 
+
