@@ -11,6 +11,8 @@ import {Menu} from "./pages/Menu.tsx";
 import {Snow} from "./pages/Snow.tsx";
 import {System} from "./pages/System.tsx";
 import {IMU} from "./pages/Imu.tsx";
+import {Demo1} from "./pages/Demo1.tsx";
+import {Dice} from "./pages/Dice.tsx";
 import './App.css'
 
 export default function App() {
@@ -22,14 +24,16 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Menu/>}/>
+                    <Route path="applications" element={<Applications/>}/>
+                    <Route path="color" element={<Color/>}/>
+                    <Route path="demo1" element={<Demo1/>}/>
+                    <Route path="dice" element={<Dice/>}/>
+                    <Route path="imu" element={<IMU/>}/>
                     <Route path="rubik" element={<Rubik/>}/>
                     <Route path="shaders" element={<Shaders/>}/>
                     <Route path="snow" element={<Snow/>}/>
-                    <Route path="applications" element={<Applications/>}/>
-                    <Route path="tests" element={<Tests/>}/>
                     <Route path="system" element={<System/>}/>
-                    <Route path="imu" element={<IMU/>}/>
-                    <Route path="color" element={<Color/>}/>
+                    <Route path="tests" element={<Tests/>}/>
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>
                 </Route>

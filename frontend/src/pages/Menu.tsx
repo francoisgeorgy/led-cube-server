@@ -4,7 +4,13 @@ export function Menu() {
     return (
         <div className="flex-1 overflow-auto bg-gray-500 flex flex-col">
             <div className="p-4 border-b border-black text-center">
+                <Link to="/demo1" className="font-bold text-xl">Demo 1</Link>
+            </div>
+            <div className="p-4 border-b border-black text-center">
                 <Link to="/color" className="font-bold text-xl">Couleur</Link>
+            </div>
+            <div className="p-4 border-b border-black text-center">
+                <Link to="/dice" className="font-bold text-xl">Dé 6 faces</Link>
             </div>
             <div className="p-4 border-b border-black text-center">
                 <Link to="/rubik" className="font-bold text-xl">Rubik's Cube</Link>

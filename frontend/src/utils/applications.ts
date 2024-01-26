@@ -1,18 +1,32 @@
 import {Application} from "./interfaces.ts";
 
+export const APP_DEMO1: Application = {
+    category: 'applications',
+    application: 'demo1',
+    title: 'Demo 1',
+    description: '',
+    requiresConfirmation: false
+}
+
 export const APP_COLORS: Application = {
     category: 'applications',
     application: 'color',
-    // stop_script: 'color_stop.sh',
     title: 'Couleur',
     description: 'Changer la couleur du cube',
+    requiresConfirmation: false
+}
+
+export const APP_DICE: Application = {
+    category: 'applications',
+    application: 'dice',
+    title: 'Dé 6 faces',
+    description: '',
     requiresConfirmation: false
 }
 
 export const APP_RUBIK: Application = {
     category: 'applications',
     application: 'rubik-websockets',
-    // stop_script: 'rubik-websockets_stop.sh',
     title: "Rubik's Cube",
     description: 'Rubik interactive',
     requiresConfirmation: false
@@ -21,8 +35,6 @@ export const APP_RUBIK: Application = {
 export const APP_SNOW_CUBE: Application = {
     category: 'applications',
     application: 'snow-cube',
-    // start_script: 'snow-cube',
-    // stop_script: 'snow-cube_stop.sh',
     title: "Cube à neige",
     description: 'Cube à neige',
     requiresConfirmation: false
@@ -31,7 +43,6 @@ export const APP_SNOW_CUBE: Application = {
 export const APP_IMU: Application = {
     category: 'tests',
     application: 'imu',
-    // stop_script: 'imu_stop.sh',
     title: "IMU",
     description: "",
     requiresConfirmation: false
@@ -40,7 +51,6 @@ export const APP_IMU: Application = {
 export const APP_HEALTH: Application = {
     category: 'applications',
     application: 'TODO.sh',
-    // stop_script: 'TODO.sh',
     title: "Health",
     description: "",
     requiresConfirmation: false
@@ -49,7 +59,6 @@ export const APP_HEALTH: Application = {
 export const APP_RESTART_WEB: Application = {
     category: 'special',
     application: 'server_restart',
-    // stop_script: 'TODO.sh',
     title: 'Redémarrer le serveur web',
     description: "",
     requiresConfirmation: false,
@@ -61,7 +70,6 @@ export const APP_RESTART_WEB: Application = {
 export const APP_REBOOT: Application = {
     category: 'applications',
     application: 'TODO.sh',
-    // stop_script: 'TODO.sh',
     title: 'Redémarrer tout le Cube',
     description: "",
     requiresConfirmation: false,
