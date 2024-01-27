@@ -10,7 +10,7 @@ sudo -E env PATH=$PATH python src/samples/rubik/websockets_rubik.py \
     --led-rows=64 --led-cols=64 \
     --led-chain 3 --led-parallel 2 \
     --led-brightness 30 \
-    --led-pixel-mapper=Cube &
+    --led-pixel-mapper=Cube >> /home/cube/logs/rubik.log 2>&1 &
 
 #echo $! | sudo tee /home/cube/python/websockets_rubik.pid
 #echo "PID is $(cat /home/cube/python/websockets_rubik.pid)"

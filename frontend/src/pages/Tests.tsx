@@ -1,4 +1,3 @@
-import {ApplicationsList} from "../components/ApplicationsList.tsx";
 import {Link} from "react-router-dom";
 import {APP_HEALTH} from "../utils/applications.ts";
 import {ApplicationButton} from "../components/ApplicationButton.tsx";

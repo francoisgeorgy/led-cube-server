@@ -33,6 +33,12 @@ with :
     kill -3 -$(pgrep -f 'scripts/rgb.glsl' | head -1)
 
 
+kill all python : 
+-----------------
+
+    TODO
+    call all stop scripts
+
 Check the processes with htop :
 -------------------------------
 

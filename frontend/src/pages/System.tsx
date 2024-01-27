@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {ApplicationButton} from "../components/ApplicationButton.tsx";
-import {APP_HEALTH, APP_REBOOT, APP_RESTART_WEB} from "../utils/applications.ts";
+import {APP_HEALTH, APP_REBOOT} from "../utils/applications.ts";
 
 export function System() {
 

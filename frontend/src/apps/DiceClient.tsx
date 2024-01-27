@@ -28,13 +28,13 @@ export const DiceClient = observer(() => {
             </div>
             <div className="responsive p-4 grid grid-cols-3 gap-4">
                 <button className="self-center bg-red-600 hover:bg-red-700 text-xl text-white px-4 py-4 rounded"
-                        onClick={() => sendMessage({command: 'dice_color', parameters: {'r': 255, 'g': 0, 'b': 0}})}>Rouge
+                        onClick={() => sendMessage({command: 'dice_color', parameters: {'r': 180, 'g': 0, 'b': 0}})}>Rouge
                 </button>
                 <button className="self-center bg-green-600 hover:bg-green-700 text-xl text-white px-4 py-4 rounded"
-                        onClick={() => sendMessage({command: 'dice_color', parameters: {'r': 0, 'g': 255, 'b': 0}})}>Vert
+                        onClick={() => sendMessage({command: 'dice_color', parameters: {'r': 0, 'g': 180, 'b': 0}})}>Vert
                 </button>
                 <button className="self-center bg-blue-600 hover:bg-blue-700 text-xl text-white px-4 py-4 rounded"
-                        onClick={() => sendMessage({command: 'dice_color', parameters: {'r': 0, 'g': 0, 'b': 255}})}>Bleu
+                        onClick={() => sendMessage({command: 'dice_color', parameters: {'r': 0, 'g': 0, 'b': 180}})}>Bleu
                 </button>
                 <button className="self-center bg-white hover:bg-gray-100 text-xl text-black px-4 py-4 rounded"
                         onClick={() => sendMessage({command: 'dice_color', parameters: {'r': 255, 'g': 255, 'b': 255}})}>Blanc

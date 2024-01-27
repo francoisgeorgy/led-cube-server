@@ -50,7 +50,7 @@ export const RubikClient = observer(() => {
                         onClick={setModeDemo}>Passer en mode démo</button>}
             </div>
 
-            {state.isRunning(APP_RUBIK) &&
+            {(true || state.isRunning(APP_RUBIK)) &&
             <div className="border-t border-blue-400 pt-2 mt-2">
                 <div className="mb-4">
                     Connexion avec l'application: {connected ? 'OK' : 'pas de connexion'}

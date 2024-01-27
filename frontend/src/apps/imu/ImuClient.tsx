@@ -3,7 +3,6 @@ import {useState} from "react";
 import {useWebSocket} from "../../useWebSocket.ts";
 import {state} from "../../State.ts";
 import "./ImuClient.css";
-import VectorDisplay from "../../components/VectorDisplay.tsx";
 import AccelerometerVisualization from "../../components/AccelerometerVisualization.tsx";
 
 export const ImuClient = observer(() => {
@@ -17,11 +16,11 @@ export const ImuClient = observer(() => {
         setReconnectCounter((prev) => prev + 1); // Increment to trigger reconnection
     };
 
-    let v = {
-        "a": -1.0,
-        "b": 1.0,
-        "c": 1.0
-    }
+    // let v = {
+    //     "a": -1.0,
+    //     "b": 1.0,
+    //     "c": 1.0
+    // }
 
     let vectorData;
     if (message) {

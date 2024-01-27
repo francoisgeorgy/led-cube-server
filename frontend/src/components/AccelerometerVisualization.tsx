@@ -1,5 +1,5 @@
-import React, {useRef} from 'react';
-import {Canvas, useFrame, MeshProps} from '@react-three/fiber';
+import React from 'react';
+import {Canvas, useFrame} from '@react-three/fiber';
 import {BoxGeometry, Mesh, MeshStandardMaterial, Quaternion, Vector3} from 'three';
 
 /*
@@ -31,12 +31,14 @@ interface CubeProps {
     direction: Vector3;
 }
 
+/*
 class BoxBufferGeometry {
     constructor(number: number, number2: number, number3: number) {
         
     }
 
 }
+*/
 
 const OrientedCube: React.FC<CubeProps> = ({direction}) => {
     const meshRef = React.useRef<Mesh>(null);

@@ -86,7 +86,7 @@ def start_application(category, application):
     """
     global running_script
 
-    logging.debug(f'start_application({category}, {application})')
+    logging.info(f'start_application({category}, {application})')
 
     if category == 'special' and application == 'server_restart':
         return server_restart()
@@ -164,6 +164,8 @@ def stop_application(category, application):
     :param application: the filename of the script, without the path
     :return:
     """
+    logging.info(f'stop_application({category}, {application})')
+
     global running_script
     script_path = os.path.join(app.config['scripts_dir'], category, application) + APP_SCRIPT_STOP_SUFFIX + APP_SCRIPT_EXT
     if not os.path.isfile(script_path):
@@ -191,6 +193,8 @@ def stop_current_script():
 
     :return:
     """
+    logging.info(f'stop_current_script()')
+
     global running_script
     if running_script is None:
         response.status = 400
@@ -214,6 +218,7 @@ def panic_stop():
 
     TODO: create a panic_stop script ?
     """
+    logging.info('panic_stop()')
     pass
 
 
@@ -235,6 +240,7 @@ def running():
 @app.route('/api/ping')
 def ping():
     """Utility api end-point mainly for quick-testing; could be used to monitor is the server is up."""
+    logging.info('ping()')
     return {"message": "pong"}
 
 
@@ -308,14 +314,21 @@ def enable_cors():
 
 
 def setup_logging(log_destination):
+    # We force the config of the logging backend because it may have already been setup
+    # by the wsgi server.
+    # TODO: understand and solve the logging config
     if log_destination == '-':
         # Logging to standard output
         logging.basicConfig(stream=sys.stdout, level=logging.DEBUG if verbose else logging.INFO,
-                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                            datefmt='%Y-%m-%d %H:%M:%S',
+                            force=True)
     elif log_destination:
         # Logging to the specified file
         logging.basicConfig(filename=log_destination, level=logging.DEBUG if verbose else logging.INFO,
-                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                            datefmt='%Y-%m-%d %H:%M:%S',
+                            force=True)
     else:
         # Disable logging if no argument is passed
         logging.disable(logging.CRITICAL)
@@ -379,7 +392,8 @@ if __name__ == '__main__':
         _call_script(args.script)
         # TODO: handle error if script not found
 
-    host_ip = '0.0.0.0' # listen on all available public IPs of the machine.
     # host_ip = get_cube_ip()
+    host_ip = '0.0.0.0' # listen on all available public IPs of the machine.
     # TODO: use a better WSGI runner (e.g. gunicorn)
-    run(app=app, host=f'{host_ip}', port=5040, debug=False, reloader=False)
+    # quiet=True disable all access logs
+    run(app=app, host=f'{host_ip}', port=5040, debug=False, reloader=False, quiet=True)
