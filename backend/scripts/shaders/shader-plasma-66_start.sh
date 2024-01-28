@@ -13,4 +13,4 @@ script="/home/cube/glsl/scripts/plasma.glsl"
 $SHADY -ofmt rgb24 -g 192x128 -f 20 -i "${script}" \
     | sudo $LEDCAT \
         --led-rows=64 --led-cols=64 --led-slowdown-gpio=5 \
-        --led-parallel=2 --led-chain=3 --led-brightness=65
+        --led-parallel=2 --led-chain=3 --led-brightness=66
