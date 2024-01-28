@@ -1,11 +1,20 @@
 import {state} from "../../State.ts";
 import {useState} from "react";
 import {observer} from "mobx-react-lite";
-import {APP_SNOW_CUBE} from "../../utils/applications.ts";
+import {APP_COLORS, APP_SNOW_CUBE} from "../../utils/applications.ts";
 import {startApplication, stopApplication} from "../../utils/commands.ts";
+import {RgbColorPicker} from "react-colorful";
 
 export const SnowClient = observer(() => {
 
+    return (
+        <div className="flex flex-col h-full">
+            <div className="responsive p-4">
+            </div>
+        </div>
+    );
+
+/*
     const [started, setStarted] = useState<boolean>(false);
 
     const startApp = async () => {
@@ -21,6 +30,7 @@ export const SnowClient = observer(() => {
             setStarted(false);
         }
     };
+
     return (
         <>
             <div className="flex-1 Xp-4 overflow-auto bg-gray-500">
@@ -41,5 +51,6 @@ export const SnowClient = observer(() => {
             </div>}
         </>
     );
+*/
 
 });

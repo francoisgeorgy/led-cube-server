@@ -35,8 +35,32 @@ export const APP_RUBIK: Application = {
 export const APP_SNOW_CUBE: Application = {
     category: 'applications',
     application: 'snow-cube',
-    title: "Cube à neige",
-    description: 'Cube à neige',
+    title: 'Cube à neige',
+    description: "Cube à neige adapté du code Adafruit. Prototype en cours de dév avec un nouvel algorithme pour l'animation des pixels.\n3000 grains.",
+    requiresConfirmation: false
+}
+
+export const APP_SNOW_CUBE_W: Application = {
+    category: 'applications',
+    application: 'snow-cube-w',
+    title: 'Cube à neige (secouer)',
+    description: "Cube à neige adapté du code Adafruit. Prototype en cours de dév avec un nouvel algorithme pour l'animation des pixels.\n3000 grains.\nSecouer pour démarrer.",
+    requiresConfirmation: false
+}
+
+export const APP_SNOW_CUBE_300: Application = {
+    category: 'applications',
+    application: 'snow-cube-300',
+    title: 'Cube à neige (300)',
+    description: "300 grains.",
+    requiresConfirmation: false
+}
+
+export const APP_SNOW_CUBE_ADAFRUIT: Application = {
+    category: 'applications',
+    application: 'snow-cube-adafruit',
+    title: "Cube à neige Adafruit",
+    description: "Cube à neige Adafruit original, adapté pour prendre en compte l'emplacement de l'IMU et l'organisation des panneaux.\n3000 grains.",
     requiresConfirmation: false
 }
 

@@ -33,7 +33,7 @@ export const ServerSelectorInput = observer(() => {
                 console.warn("unexpected response", response.status)
                 state.setRunning('');
             } else if (Object.prototype.hasOwnProperty.call(data, 'running')) {
-                console.log("running: ", data.running)
+                // console.log("running: ", data.running)
                 state.setRunning(data.running);
             } else {
                 console.warn("unexpected response", data)

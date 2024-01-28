@@ -6,7 +6,7 @@ if [ -n "$app_pid" ]; then
     sleep 1
 fi
 
-sudo /home/cube/led-matrix-cube-cpp/cmake-build-debug-pi-de-e0/snow_cube_param
+sudo /home/cube/led-matrix-cube-cpp/cmake-build-debug-pi-de-e0/snow_cube_param -n 50
 
 #echo $! | sudo tee /home/cube/${APP}.pid
 #echo "PID is $(cat /home/cube/${APP}.pid)"

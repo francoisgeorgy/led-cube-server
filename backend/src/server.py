@@ -95,7 +95,7 @@ def start_application(category, application):
     # TODO: add option to ignore request if a script is already running
     if running_script:
 
-        logging.debug(f"{running_script['category']}/{running_script['application']} is already running")
+        logging.info(f"{running_script['category']}/{running_script['application']} is already running")
 
         # If the requested script is already running, we do nothing
         # if running_script['category'] == category and running_script['application'] == application:
@@ -122,7 +122,7 @@ def start_application(category, application):
             # subprocess.Popen is non-blocking
             # The os.setsid() is passed in the argument preexec_fn so
             # it's run after the fork() and before exec() to run the shell.
-            logging.debug(f'calling {script_path}')
+            logging.info(f'calling {script_path}')
             p = subprocess.Popen(script_path, stdout=subprocess.PIPE, shell=False, preexec_fn=os.setsid)
             # return {"message": f"process {os.getpgid(p.pid)} called"}
         except Exception as e:
@@ -141,7 +141,7 @@ def start_application(category, application):
         # subprocess.Popen is non-blocking
         # The os.setsid() is passed in the argument preexec_fn so
         # it's run after the fork() and before exec() to run the shell.
-        logging.debug(f'calling {script_path}')
+        logging.info(f'calling {script_path}')
         p = subprocess.Popen(script_path, stdout=subprocess.PIPE, shell=False, preexec_fn=os.setsid)
         running_script = {
             'category': category,

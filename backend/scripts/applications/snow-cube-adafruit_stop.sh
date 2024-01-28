@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP="snow_cube_param"
+APP="adafruit_cube_adapted"
 
 app_pid=$(pgrep -f "${APP}" | tail -n 1)
 
