@@ -51,7 +51,9 @@ export const Demo1Client = observer(() => {
                 <button className="self-center bg-blue-600 hover:bg-blue-700 text-xl text-white py-4 rounded"
                         onClick={() => sendMessage({command: 'demo_text2'})}>Fontes
                 </button>
-                <div></div>
+                <button className="self-center bg-blue-600 hover:bg-blue-700 text-xl text-white py-4 rounded"
+                        onClick={() => sendMessage({command: 'demo_text_scroll'})}>Texte 2
+                </button>
                 <button className="self-center bg-gray-600 hover:bg-gray-500 text-xl text-yellow-300 py-4 rounded"
                         onClick={() => sendMessage({command: 'show_faces'})}>Faces
                 </button>
