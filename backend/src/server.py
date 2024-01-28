@@ -30,21 +30,30 @@ app = Bottle()
 running_script = None
 
 
-def _call_script(script):
+def _call_startup_script(application):
+
+    logging.info(f"_call_startup_script({application})")
+
     global running_script
     if running_script:
+        logging.info("_call_startup_script: running_script non empty; abort")
         return None
-    script_path = os.path.join(app.config['scripts_dir'], script)
+    category = 'startup'
+    script_path = os.path.join(app.config['scripts_dir'], category, application) + APP_SCRIPT_START_SUFFIX + APP_SCRIPT_EXT
     if not os.path.isfile(script_path):
+        logging.info(f"_call_startup_script: {script_path} not found")
         return None
     try:
+        logging.info(f"_call_startup_script: calling {script_path}")
         p = subprocess.Popen(script_path, stdout=subprocess.PIPE, shell=False, preexec_fn=os.setsid)
         running_script = {
-            'script': script,
+            'category': category,
+            'application': application,
             'process': p
         }
         return os.getpgid(p.pid)
     except Exception as e:
+        logging.exception(f'error when calling {script_path}')
         return None
 
 
@@ -349,7 +358,7 @@ if __name__ == '__main__':
     #
 
     parser.add_argument('-c', '--config', type=str, default=None, help='Path to the configuration file')
-    parser.add_argument('-s', '--script', type=str, default=None, help='Name of the script to run')
+    parser.add_argument('-s', '--start', type=str, default=None, help='Name of the startup application to run')
     parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose mode')
     parser.add_argument("--logfile", type=str, nargs='?', const='-', default=None,
                         help="Specify '-' to log to standard output, or provide a filename to log to that file")
@@ -369,7 +378,7 @@ if __name__ == '__main__':
 
     # TODO,FIXME : redirect Bottle logs to a file
     logging.info(f"Configuration file: {args.config}")
-    logging.info(f"Script to run: {args.script}")
+    logging.info(f"Startup application: {args.start}")
 
     # Load configuration from the file
     env = os.getenv('CUBE_ENV', 'development')
@@ -389,8 +398,8 @@ if __name__ == '__main__':
     app.config.update(config_data)
     logging.info(f'configuration loaded from {config_file}')
 
-    if args.script is not None:
-        _call_script(args.script)
+    if args.start is not None:
+        _call_startup_script(args.start)
         # TODO: handle error if script not found
 
     # host_ip = get_cube_ip()

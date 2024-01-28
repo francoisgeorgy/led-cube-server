@@ -1,4 +1,3 @@
-import {ApplicationHeader} from "../components/ApplicationHeader.tsx";
 import {APP_SNOW_CUBE, APP_SNOW_CUBE_300, APP_SNOW_CUBE_ADAFRUIT, APP_SNOW_CUBE_W} from "../utils/applications.ts";
 import {ApplicationButton} from "../components/ApplicationButton.tsx";
 
@@ -9,7 +8,6 @@ export function Snow() {
             <ApplicationButton application={APP_SNOW_CUBE_W}/>
             <ApplicationButton application={APP_SNOW_CUBE_ADAFRUIT}/>
             <ApplicationButton application={APP_SNOW_CUBE_300}/>
-            {/*<SnowClient/>*/}
         </div>
     );
 }

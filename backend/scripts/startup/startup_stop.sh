@@ -25,15 +25,19 @@
 #
 #    sudo kill -9 $PID
 
-APP="cube_infos"
+APP="startup_infos.py"
 
-app_pid=$(pgrep -f "${APP}.py" | tail -n 1)
+#app_pid=$(pgrep -f "${APP}" | tail -n 1)
+#
+#if [ -n "$app_pid" ]; then
+#    echo "${APP} PID is: $app_pid"
+#    # TODO: find a better way to stop the server
+#    # TODO: Do we really need to use a negative PID to kill the whole process group?
+#    sudo kill -9 $app_pid
+#else
+#    echo "Aucun process ${APP} trouvé."
+#fi
 
-if [ -n "$app_pid" ]; then
-    echo "${APP} PID is: $app_pid"
-    # TODO: find a better way to stop the server
-    # TODO: Do we really need to use a negative PID to kill the whole process group?
-    sudo kill -9 -$app_pid
-else
-    echo "Aucun process ${APP} trouvé."
-fi
+for pid in $(pgrep -f "${APP}"); do
+    sudo kill -9 $pid
+done
