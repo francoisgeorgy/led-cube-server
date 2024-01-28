@@ -64,7 +64,7 @@ export const ApplicationButton = observer(({application, formatNameFunc}: Applic
     return (
         <div className={`p-4 border-b border-black flex flex-col`}>
             <div className="w-full flex justify-center items-center relative">
-                <h3 onClick={() => toggle()} className={` cursor-pointer Xself-center Xw-full text-center font-bold text-xl`}>
+                <h3 onClick={() => toggle()} className={`cursor-pointer text-center font-bold text-xl`}>
                     {displayFormattedName(application.title)}
                 </h3>
                 {state.isRunning(application) && <div className="absolute right-0 text-yellow-300 text-3xl" title="Application active">☀</div>}

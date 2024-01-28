@@ -107,3 +107,29 @@ export const running = async () => {
     // console.log("return from sendCommand");
 };
 */
+
+
+export const rebootServer = async (code:string) => {
+    // console.log("enter rebootServer");
+    try {
+        const response = await fetch(
+            `http://${state.cube_host}:${state.port_http}/api/system/reboot/${code}`,
+            {mode: "cors"}
+        );
+        // console.log("command sent");
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data?.error ?? `${response.status} requête invalide`);
+        }
+        // console.log(data); // Process your data here
+        state.setStatus(data?.message ?? '');
+    } catch (error) {
+        console.error('rebootServer: expected There was a problem with the fetch operation:', error);
+        // @ts-expect-error error is not type
+        state.setStatus(error.message ?? 'Erreur de communication');
+        return false;
+    }
+    state.setAlive(false);
+    return true;
+    // console.log("return from sendCommand");
+};

@@ -3,7 +3,6 @@ import {Footer} from "./components/Footer.tsx";
 import {Outlet, Route, Routes} from "react-router-dom";
 import {Rubik} from "./pages/Rubik.tsx";
 import {Shaders} from "./pages/Shaders.tsx";
-import {Tests} from "./pages/Tests.tsx";
 import {Applications} from "./pages/Applications.tsx";
 import {NotFound} from "./pages/NotFound.tsx";
 import {Color} from "./pages/Color.tsx";
@@ -33,7 +32,7 @@ export default function App() {
                     <Route path="shaders" element={<Shaders/>}/>
                     <Route path="snow" element={<Snow/>}/>
                     <Route path="system" element={<System/>}/>
-                    <Route path="tests" element={<Tests/>}/>
+                    {/*<Route path="tests" element={<Tests/>}/>*/}
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>
                 </Route>

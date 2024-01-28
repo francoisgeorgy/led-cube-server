@@ -271,8 +271,9 @@ def system_reboot(code):
     # TODO: replace the code by a more robust security check; the code can easily be grabbed from the browser console.
     logging.info(f'server_restart()')
     if code != '424242':
-        logging.debug(f"system_reboot: invalid code")
+        logging.warning(f"system_reboot: invalid code")
         return
+    logging.info(f"system_reboot: trigger reboot")
     os.system('sudo reboot')
 
 
