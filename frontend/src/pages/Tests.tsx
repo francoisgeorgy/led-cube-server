@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {APP_HEALTH} from "../utils/applications.ts";
+import {APP_RGB_STRIPES} from "../utils/applications.ts";
 import {ApplicationButton} from "../components/ApplicationButton.tsx";
 
 /*
@@ -16,7 +16,8 @@ export function Tests() {
             <div className="p-4 border-b border-black text-center">
                 <Link to="/imu" className="font-bold text-xl">IMU</Link>
             </div>
-            <ApplicationButton application={APP_HEALTH}/>
+            <ApplicationButton application={APP_RGB_STRIPES}/>
+            {/*<ApplicationButton application={APP_HEALTH}/>*/}
         </div>
     );
 }

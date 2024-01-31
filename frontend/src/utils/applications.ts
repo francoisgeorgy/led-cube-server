@@ -64,6 +64,14 @@ export const APP_SNOW_CUBE_ADAFRUIT: Application = {
     requiresConfirmation: false
 }
 
+export const APP_RGB_STRIPES: Application = {
+    category: 'tests',
+    application: 'rgbstripes',
+    title: "RGB Stripes",
+    description: "",
+    requiresConfirmation: false
+}
+
 export const APP_IMU: Application = {
     category: 'tests',
     application: 'imu',
@@ -76,7 +84,7 @@ export const APP_HEALTH: Application = {
     category: 'applications',
     application: 'TODO.sh',
     title: "Health",
-    description: "",
+    description: "Pas encore disponible.",
     requiresConfirmation: false
 }
 

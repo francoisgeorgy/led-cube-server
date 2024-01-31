@@ -21,11 +21,9 @@ export function Menu() {
             <div className="p-4 border-b border-black text-center">
                 <Link to="/shaders" className="font-bold text-xl">Shaders</Link>
             </div>
-{/*
             <div className="p-4 border-b border-black text-center">
                 <Link to="/tests" className="font-bold text-xl">Tests</Link>
             </div>
-*/}
             <div className="p-4 border-b border-black text-center">
                 <Link to="/system" className="font-bold text-xl">Système</Link>
             </div>

@@ -13,6 +13,7 @@ import {IMU} from "./pages/Imu.tsx";
 import {Demo1} from "./pages/Demo1.tsx";
 import {Dice} from "./pages/Dice.tsx";
 import './App.css'
+import {Tests} from "./pages/Tests.tsx";
 
 export default function App() {
     return (
@@ -32,7 +33,7 @@ export default function App() {
                     <Route path="shaders" element={<Shaders/>}/>
                     <Route path="snow" element={<Snow/>}/>
                     <Route path="system" element={<System/>}/>
-                    {/*<Route path="tests" element={<Tests/>}/>*/}
+                    <Route path="tests" element={<Tests/>}/>
                     {/* path="*"" means "match anything" */}
                     <Route path="*" element={<NotFound/>}/>
                 </Route>
