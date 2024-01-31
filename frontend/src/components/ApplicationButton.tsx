@@ -31,7 +31,7 @@ export const ApplicationButton = observer(({application, formatNameFunc}: Applic
     };
 
     const startApp = async (app: Application) => {
-        console.log("startApplication", app);
+        // console.log("startApplication", app);
         if (app.requiresConfirmation) {
             // TODO: implement confirmation dialog
             if (window.confirm(`Launch ${app.title}?`)) {
@@ -42,11 +42,11 @@ export const ApplicationButton = observer(({application, formatNameFunc}: Applic
         if (app.code) {
             const c = window.prompt("Code?");
             if (c !== app.code) {
-                console.log("invalid code");
+                // console.log("invalid code");
                 return false;
             }
         }
-        console.log(`Launching ${app.title}`);
+        // console.log(`Launching ${app.title}`);
         // Launch the application
         const b = await startApplication(app.category, app.application);
         // console.log('startScript result:', b);

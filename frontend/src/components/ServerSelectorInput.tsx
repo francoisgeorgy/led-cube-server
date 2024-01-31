@@ -58,7 +58,7 @@ export const ServerSelectorInput = observer(() => {
         if (userInput !== null) {
             try {
                 const a = parseHostnamePort(userInput);
-                console.log(a);
+                // console.log(a);
                 state.setCubeHost(a.host);
                 // if (a.port) {
                 //     state.setCubeHost(a.host);
