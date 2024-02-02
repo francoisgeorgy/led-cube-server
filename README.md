@@ -26,5 +26,11 @@ Checkout the [main repository](https://github.com/francoisgeorgy/led-cube) to ge
 
 ## Build frontend
 
+TODO
+
+## Credits
+
+TODO
+
 
 
