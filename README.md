@@ -1,4 +1,4 @@
-LED Cube - Remove control
+LED Cube - Remote control
 =========================
 
 To be documented...
