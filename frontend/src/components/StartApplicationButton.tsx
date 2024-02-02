@@ -15,7 +15,7 @@ export function StartApplicationButton({application}: CommandButtonProps) {
                 // Launch the application
             }
         } else {
-            console.log(`Launching ${app.title}`);
+            // console.log(`Launching ${app.title}`);
             // Launch the application
             startApplication(app.category, app.application);
         }

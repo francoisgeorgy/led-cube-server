@@ -62,7 +62,7 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
         ws.current = new WebSocket(url);
 
         ws.current.onopen = () => {
-            console.log('WebSocket.onOpen', url);
+            // console.log('WebSocket.onOpen', url);
             reconnectAttempts = 0; // Reset reconnect attempts on successful connection
             setConnected(true);
             setStatus(`connected`);
@@ -71,7 +71,7 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
 
         ws.current.onmessage = (event: MessageEvent<string>) => {
             const message = JSON.parse(event.data) as MyMessageData;
-            console.log("onmessage", message)
+            // console.log("onmessage", message)
             // setCounter(message.counter);
             setMessage(message.message);
         };
@@ -81,18 +81,18 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
         };
 
         ws.current.onclose = () => {
-            console.log('WebSocket.onClose');
+            // console.log('WebSocket.onClose');
             setConnected(false);
             // console.log('WebSocket.onClose: connected set to false');
             if (reconnectAttempts < maxReconnectAttempts) {
-                console.log('useWebSocket.onClose: trying to reconnect...', reconnectAttempts);
+                // console.log('useWebSocket.onClose: trying to reconnect...', reconnectAttempts);
                 setStatus(`trying to connect... (${reconnectAttempts+1}/${maxReconnectAttempts})`);
                 reconnectionTimeout.current = setTimeout(() => {
                     connect();
                     reconnectAttempts++;
                 }, reconnectInterval);
             } else {
-                console.log('useWebSocket.onClose: max reconnect attempts reached, not attempting further reconnects');
+                // console.log('useWebSocket.onClose: max reconnect attempts reached, not attempting further reconnects');
                 setStatus(`unable to connect`);
                 reconnectAttempts = 0; // Reset reconnect attempts for the case if the user force a reconnection
             }
@@ -104,21 +104,21 @@ export const useWebSocket = (url: string, reconnectCounter: unknown) => {
         // const ws = new WebSocket(url);
         connect();
         return () => {
-            console.log("cleanup")
+            // console.log("cleanup")
             // isMounted.current = false; // Set to false when the component is unmounted
             if (reconnectionTimeout.current) {
-                console.log("clear reconnection timeout");
+                // console.log("clear reconnection timeout");
                 clearTimeout(reconnectionTimeout.current);
             }
             if (ws.current) {
-                console.log("ws.current.close()");
+                // console.log("ws.current.close()");
                 ws.current.close();
             }
         };
     }, [connect, reconnectCounter]);
 
     const sendMessage = useCallback((message: MessageToCube) => {
-        console.log("useWebSocket.sendMessage", message);
+        // console.log("useWebSocket.sendMessage", message);
         if (ws.current && ws.current.readyState === WebSocket.OPEN) {
             ws.current.send(JSON.stringify({"command": message.command, 'parameters': message.parameters == null ? undefined : message.parameters}));
         }
