@@ -1,5 +1,5 @@
 {
     "debug_mode": true,
-    "scripts_dir": "/Users/francois/dev/projects/electronics/led-cube-remote-sandbox/scripts",
+    "scripts_dir": "/home/cube/server/backend/scripts",
     "front_end": "/home/cube/server/frontend/dist"
 }
