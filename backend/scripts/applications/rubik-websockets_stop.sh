@@ -12,9 +12,9 @@
 
 # Après avoir démarré, les process sont :
 #
-#    root      1176     1  0 10:57 pts/0    00:00:00 sudo -E env PATH=/home/cube/python/.venv/bin:/home/francois/.local/share/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games python src/samples/rubik/websockets_rubik.py --led-slowdown-gpio 5 --led-rows=64 --led-cols=64 --led-chain 3 --led-parallel 2 --led-brightness 30 --led-pixel-mapper=Cube
-#    root      1180  1176  0 10:57 pts/2    00:00:00 sudo -E env PATH=/home/cube/python/.venv/bin:/home/francois/.local/share/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games python src/samples/rubik/websockets_rubik.py --led-slowdown-gpio 5 --led-rows=64 --led-cols=64 --led-chain 3 --led-parallel 2 --led-brightness 30 --led-pixel-mapper=Cube
-#    daemon    1182  1180 63 10:57 pts/2    00:00:57 python src/samples/rubik/websockets_rubik.py --led-slowdown-gpio 5 --led-rows=64 --led-cols=64 --led-chain 3 --led-parallel 2 --led-brightness 30 --led-pixel-mapper=Cube
+#    root      1176     1  0 10:57 pts/0    00:00:00 sudo -E env PATH=/home/cube/python/.venv/bin:/home/francois/.local/share/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games python src/examples/rubik/websockets_rubik.py --led-slowdown-gpio 5 --led-rows=64 --led-cols=64 --led-chain 3 --led-parallel 2 --led-brightness 30 --led-pixel-mapper=Cube
+#    root      1180  1176  0 10:57 pts/2    00:00:00 sudo -E env PATH=/home/cube/python/.venv/bin:/home/francois/.local/share/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games python src/examples/rubik/websockets_rubik.py --led-slowdown-gpio 5 --led-rows=64 --led-cols=64 --led-chain 3 --led-parallel 2 --led-brightness 30 --led-pixel-mapper=Cube
+#    daemon    1182  1180 63 10:57 pts/2    00:00:57 python src/examples/rubik/websockets_rubik.py --led-slowdown-gpio 5 --led-rows=64 --led-cols=64 --led-chain 3 --led-parallel 2 --led-brightness 30 --led-pixel-mapper=Cube
 #
 #    pgrep -f websockets_rubik.py
 #    1176

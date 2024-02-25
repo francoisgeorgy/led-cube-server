@@ -62,8 +62,12 @@ python src/server.py -v >> /home/cube/logs/server.log 2>&1
 # TODO: review config file emplacement
 
 
+Test : 
+
     cd /home/cube/server/backend
     python src/server.py --logfile -
+
+in a browser, open http://<cube-ip-address>:5040/  
 
 
 

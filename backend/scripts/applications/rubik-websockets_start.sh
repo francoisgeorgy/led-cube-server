@@ -5,7 +5,7 @@ cd /home/cube/python || exit
 # source /home/cube/python/.venv/bin/activate
 
 # TODO: remove arguments which are default values
-sudo -E env PATH=$PATH python src/samples/rubik/websockets_rubik.py \
+sudo -E env PATH=$PATH python src/examples/rubik/websockets_rubik.py \
     --led-slowdown-gpio 5 \
     --led-rows=64 --led-cols=64 \
     --led-chain 3 --led-parallel 2 \
