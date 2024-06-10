@@ -1,14 +1,14 @@
 #!/bin/bash
 
-#/home/cube/glsl/run.sh /home/cube/glsl/scripts/plasma.glsl
+#/home/cube/shaders/run.sh /home/cube/shaders/scripts/plasma.glsl
 
 export EGL_PLATFORM=surfaceless
 export MESA_GL_VERSION_OVERRIDE=3.3
 
 LEDCAT="/home/cube/rpi-rgb-led-matrix/examples-api-use/ledcat"
-SHADY="/home/francois/.local/share/go/bin/shady"
+SHADY="~/.local/share/go/bin/shady"
 
-script="/home/cube/glsl/scripts/plasma.glsl"
+script="/home/cube/shaders/scripts/plasma.glsl"
 
 $SHADY -ofmt rgb24 -g 192x128 -f 20 -i "${script}" \
     | sudo $LEDCAT \
