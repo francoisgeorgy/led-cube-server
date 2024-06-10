@@ -9,7 +9,8 @@ export interface Preferences {
 }
 
 export const DEFAULT_PREFERENCES: Preferences = {
-    cube_host: "127.0.0.1",
+    // cube_host: "127.0.0.1",
+    cube_host: window.location.hostname,
     port_http: 5040,
     port_ws: 5041
 }
